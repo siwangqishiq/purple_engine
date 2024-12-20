@@ -65,25 +65,7 @@ extern "C"
 JNIEXPORT void JNICALL
 Java_panyi_xyz_textrender_NativeBridge_handleOnAction(JNIEnv *env, jclass clazz, jint action,
                                                       jfloat x, jfloat y) {
-    // LOGI("onAction: %d , %f , %f" , action , x , y);
     if(app != nullptr){
-        int transformAction = -1;
-//        switch (action) {
-//            case 0://down
-//                transformAction = ACTION_DOWN;
-//                break;
-//            case 1://up
-//                transformAction = ACTION_UP;
-//                break;
-//            case 2://move
-//                transformAction = ACTION_MOVE;
-//                break;
-//            default:
-//                break;
-//        }//end switch
-//        if(transformAction >= 0){
-//            app->onTouchEvent(action , x , y);
-//        }
         app->onTouchEvent(action , x , y);
     }//end if
 }

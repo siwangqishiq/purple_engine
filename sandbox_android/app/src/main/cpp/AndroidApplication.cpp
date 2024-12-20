@@ -8,6 +8,7 @@
 #include "test_ui.h"
 #include "test_ui_img.h"
 #include "test_ui_text.h"
+#include "input/input_manager.h"
 #include <thread>
 #include <string>
 #include <vector>
@@ -54,7 +55,28 @@ void AndroidApplication::resize(int w , int h) {
 }
 
 void AndroidApplication::onTouchEvent(int action , float x , float y){
-    for(std::shared_ptr<purple::IApp> &app : appInstanceList){
-        app->onEvent(action , x , y);
+    int inputAction = 0;
+    switch (action) {
+        case 0://down
+            inputAction = purple::EVENT_ACTION_BEGIN;
+            break;
+        case 1:
+            inputAction = purple::EVENT_ACTION_END;
+            break;
+        case 2://move
+            inputAction = purple::EVENT_ACTION_MOVE;
+            break;
+        case 3://cancel
+            inputAction = purple::EVENT_ACTION_CANCEL;
+            break;
+        default:
+            break;
     }
+
+    purple::InputEvent event;
+    event.action = inputAction;
+    event.x = x;
+    event.y = purple::Engine::ScreenHeight - y;
+
+    purple::InputManager::getInstance()->onEvent(event);
 }

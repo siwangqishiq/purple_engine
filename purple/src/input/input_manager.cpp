@@ -23,7 +23,7 @@ namespace purple{
     }
 
     void InputManager::onEvent(InputEvent event){
-        // Log::i("input" , "on event action : %d (%f , %f)" ,event.action , event.x , event.y);
+//         Log::i("input" , "on event action : %d (%f , %f)" ,event.action , event.x , event.y);
 
         for(auto &pair : onEventCallbacks){
             if(pair.second != nullptr){

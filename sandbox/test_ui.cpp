@@ -844,8 +844,9 @@ void TestUi::testInputEvent1(){
     ui->setRootContainer(container);
     
     tab1->id = "tab1";
-    tab1->setClick<Text>([](InputEvent &e){
+    tab1->setClick<Text>([tab1](InputEvent &e){
         Log::w("input_action","tab1 clicked");
+        tab1->setVisible(VisibleState::Gone);
     });
 
     tab2->id = "tab2";
@@ -857,7 +858,7 @@ void TestUi::testInputEvent1(){
     tab3->setClick<Text>([tab3](InputEvent &e){
         Log::w("input_action","tab3 clicked");
     });
-
+    
     container->setClick<ColumContainer>([](InputEvent &e){
         Log::w("input_action","Container Clicked!");
     });
