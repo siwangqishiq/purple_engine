@@ -32,6 +32,7 @@ namespace purple{
             // std::cout << "targetWidget is not null id = " << targetWidget->id << std::endl;
             costEvent = targetWidget->onInputEvent(event);
         }else{
+            // std::cout << "targetWidget is null" << std::endl;
             costEvent = rootContainer_->dispatchInputEvent(event);
         }
 

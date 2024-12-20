@@ -59,7 +59,7 @@ void Application::init(){
             purple::InputEvent event;
             event.action = purple::EVENT_ACTION_MOVE;
             event.x = xpos;
-            event.y = Application::screenHeight - ypos;
+            event.y = purple::Engine::ScreenHeight - ypos;
 
             purple::InputManager::getInstance()->onEvent(event);
         }
@@ -68,7 +68,7 @@ void Application::init(){
             purple::InputEvent event;
             event.action = purple::EVENT_ACTION_MOUSE_MIDDLE_MOVE;
             event.x = xpos;
-            event.y = Application::screenHeight - ypos;
+            event.y = purple::Engine::ScreenHeight - ypos;
 
             purple::InputManager::getInstance()->onEvent(event);
         }
@@ -77,7 +77,7 @@ void Application::init(){
             purple::InputEvent event;
             event.action = purple::EVENT_ACTION_MOUSE_RIGHT_MOVE;
             event.x = xpos;
-            event.y = Application::screenHeight - ypos;
+            event.y = purple::Engine::ScreenHeight - ypos;
             
             purple::InputManager::getInstance()->onEvent(event);
         }
@@ -118,7 +118,7 @@ void Application::init(){
         double y = 0;
         glfwGetCursorPos(window, &x, &y);
         event.x = x;
-        event.y = Application::screenHeight - y;
+        event.y = purple::Engine::ScreenHeight - y;
 
         purple::InputManager::getInstance()->onEvent(event);
     });

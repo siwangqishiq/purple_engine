@@ -506,7 +506,7 @@ void TestUi::testContainerCompose(){
         .setTextGravity<Text>(TextGravity::CenterLeft)
         .setFontColor<Text>(ConverColorValue(Color::Black));
     headContainer->addChild(headText);
-
+    
     ui->rootContainer_ = container;
 }
 
@@ -515,15 +515,18 @@ void TestUi::onInit(){
 
     this->ui = std::make_shared<purple::UiRoot>(purple::Engine::ScreenWidth , 
         purple::Engine::ScreenHeight);
-    
+
+    // purple::InputManager::getInstance()->removeEventListener("ui");
     purple::InputManager::getInstance()->addEventListener("ui",[this](purple::InputEvent &e){
-        if(ui != nullptr){
-            return ui->dispatchInputEvent(e);
+        if(this->ui != nullptr){
+            // std::cout << "rootui = " << this->ui << std::endl;
+            return this->ui->dispatchInputEvent(e);
         }
         return false;
     });
 
-    // testContainer();
+
+        // testContainer();
     // testColoumContainer();
     // testColumContainerGravity();
     // testColumContainerWeight();
@@ -541,6 +544,7 @@ void TestUi::onInit(){
     // testContainerCompose3();
 
     testInputEvent1();
+   
 }
 
 void TestUi::testContainerCompose2(){
