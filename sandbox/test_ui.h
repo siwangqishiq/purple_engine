@@ -39,4 +39,6 @@ private:
     void testContainerCompose2();
 
     void testContainerCompose3();
+
+    void testInputEvent1();
 };

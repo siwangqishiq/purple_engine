@@ -17,7 +17,7 @@ namespace purple{
 
         bool dispatchInputEvent(InputEvent &event);
 
-        void setTargetWidget(PWidget target);
+        void setTargetWidget(Widget *target);
 
         ~UiRoot();
         
@@ -27,6 +27,6 @@ namespace purple{
         int rootHeight_;
 
         std::shared_ptr<TextureInfo> textureInfo_ = nullptr;
-        PWidget targetWidget = nullptr;
+        Widget *targetWidget = nullptr;
     };//end class
 }

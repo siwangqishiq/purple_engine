@@ -1,6 +1,7 @@
 #include "ui/widget.h"
 #include "purple.h"
 #include "ui/container.h"
+#include "ui/ui_root.h"
 
 namespace purple{
     void Widget::setParentWidget(Container *parent){
@@ -110,6 +111,13 @@ namespace purple{
         return onClickFn != nullptr;
     }
 
+    void Widget::setSelfUiRootTarget(){
+        UiRoot* rootUi = findRootUi();
+        if(rootUi != nullptr){
+            rootUi->setTargetWidget(this);
+        }
+    }
+
     void Widget::setRootUi(UiRoot *root){
         this->rootUi = root;
     }
@@ -124,12 +132,16 @@ namespace purple{
         bool ret = false;
         const float x = event.x;
         const float y = event.y;
+
+        // std::cout << "widget: " << this->id << " event " << event.action << std::endl;
         
         switch(event.action){
             case EVENT_ACTION_BEGIN:
                 if(needEatInputBeginEvent()){
                     ret = true;
-                    // if(rect.isPointInRect(x, y)){
+                    setSelfUiRootTarget();
+                    
+                    // if(rect.isPointInRect(x, y)){ 
                     //     ret = true;
                     // }
                 }
@@ -141,11 +153,13 @@ namespace purple{
                     }
                 }
                 break;
-            case EVENT_ACTION_END:
-                if(!actionMoveOutScope){
-                    performClick(event);
+            case EVENT_ACTION_END:{
+                    auto rect = getWidgetRect();
+                    if(!actionMoveOutScope && rect.isPointInRect(x, y)){
+                        performClick(event);
+                    }
+                    actionMoveOutScope = false;
                 }
-                actionMoveOutScope = false;
                 break;
             case EVENT_ACTION_CANCEL:
                 actionMoveOutScope = false;

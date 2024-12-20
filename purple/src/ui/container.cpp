@@ -1,5 +1,4 @@
 #include "ui/container.h"
-#include "ui/ui_root.h"
 
 namespace purple{
     Container::~Container(){
@@ -81,13 +80,18 @@ namespace purple{
             for(int i = childCount - 1; i >= 0; i--){
                 PWidget childWidget = childWidgets[i];
                 Rect rectScope = childWidget->getWidgetRect();
+                // std::cout << "Container::dispatchInputEvent child: " 
+                //     << childWidget->id 
+                //     << " rect: " << rectScope.left << "," 
+                //     << rectScope.top << "  "
+                //     << rectScope.width << "  "
+                //     << rectScope.height
+                //     << "   event_x " << event.x << " event_y " << event.y
+                //     << std::endl;
                 if(rectScope.isPointInRect(event.x , event.y)){
                     const bool isCost = childWidget->dispatchInputEvent(event);
+                    // std::cout << "child: " << childWidget->id << "  isCost = " << isCost << std::endl;
                     if(isCost){
-                        UiRoot* rootUi = findRootUi();
-                        if(rootUi != nullptr){
-                            rootUi->setTargetWidget(childWidget);
-                        }
                         return true;
                     }
                 }

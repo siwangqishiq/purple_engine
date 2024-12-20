@@ -254,6 +254,8 @@ namespace purple{
         std::function<void(InputEvent&)> onClickFn = nullptr;
 
         bool needEatInputBeginEvent();
+
+        void setSelfUiRootTarget();
     private:
         UiRoot *rootUi = nullptr;
 

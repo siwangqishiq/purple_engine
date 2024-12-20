@@ -176,6 +176,10 @@ namespace purple{
         int totalWeight = 0;
         int widgetTotalMargin = 0;
         for(auto &widget : hasWeightWidgets_){
+            if(widget->getVisible() != VisibleState::Normal){
+                continue;
+            }
+            
             totalWeight += widget->getLayoutWeight();
             widgetTotalMargin += widget->getMarginVertical();
         }//end for each

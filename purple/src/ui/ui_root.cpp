@@ -29,6 +29,7 @@ namespace purple{
         
         bool costEvent = false;
         if(targetWidget != nullptr){
+            // std::cout << "targetWidget is not null id = " << targetWidget->id << std::endl;
             costEvent = targetWidget->onInputEvent(event);
         }else{
             costEvent = rootContainer_->dispatchInputEvent(event);
@@ -40,7 +41,7 @@ namespace purple{
         return costEvent;
     }
 
-    void UiRoot::setTargetWidget(PWidget target){
+    void UiRoot::setTargetWidget(Widget *target){
         this->targetWidget = target;
     }
 
