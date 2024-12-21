@@ -10,3 +10,4 @@
 #include "ui/stack_container.h"
 #include "ui/img.h"
 #include "ui/text.h"
+#include "ui/custom_widget.h"

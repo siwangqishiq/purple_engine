@@ -543,8 +543,8 @@ void TestUi::onInit(){
     // testContainerCompose2();
     // testContainerCompose3();
 
-    testInputEvent1();
-   
+    // testInputEvent1();
+    testCustomWidget();
 }
 
 void TestUi::testContainerCompose2(){
@@ -944,6 +944,21 @@ void TestUi::testColumContainer(){
         .setFontWeight<Text>(100.0f)
         .setLayoutWeight<Text>(2);
     rootContainer->addChild(text3);
+}
+
+void TestUi::testCustomWidget(){
+    using namespace purple;
+
+    auto rootContainer = std::make_shared<StackContainer>(LAYOUT_MATCH_PARENT, LAYOUT_MATCH_PARENT);
+    rootContainer->setBackgroundColor<StackContainer>(ConverColorValue(Color::SkyBlue));
+
+    ui->setRootContainer(rootContainer);
+    
+    auto customWidget = std::make_shared<CustomWidget>(100, 100);
+    customWidget->setBackgroundColor<Widget>(ConverColorValue(Color::Pink));
+    customWidget->setLayoutGravity<Widget>(LayoutGravity::Center);
+
+    rootContainer->addChild(customWidget);
 }
 
 void TestUi::onTick(){

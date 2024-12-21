@@ -44,7 +44,7 @@ TEST_F(PurpleUiCustomWidgetTest,custom_widget_test1){
     for(auto &event : inputSeq){
         uiRoot->dispatchInputEvent(event);
     }//end for each
-
+    
     EXPECT_EQ(isClicked, true);
 }
 

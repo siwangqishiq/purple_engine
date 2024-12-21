@@ -41,4 +41,6 @@ private:
     void testContainerCompose3();
 
     void testInputEvent1();
+
+    void testCustomWidget();
 };

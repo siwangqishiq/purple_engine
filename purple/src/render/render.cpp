@@ -715,7 +715,7 @@ namespace purple{
             Log::e("buildVirtualTexture" , "createFrameBufferForVirtualTexture error");
             return nullptr;
         }
-        
+
         glBindFramebuffer(GL_FRAMEBUFFER , ret->framebufferId);
         if(glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE){
             Log::e("buildVirtualTexture" , "framebuffer state is error");
@@ -731,8 +731,10 @@ namespace purple{
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         glViewport(0 , 0 , viewWidth , viewHeight);
         resetNormalMat(viewWidth , viewHeight);
-
-        renderFn(viewWidth , viewHeight); // user custom render function callback
+        
+        if(renderFn != nullptr){
+            renderFn(viewWidth , viewHeight); // user custom render function callback    
+        }
 
         glBindTexture(GL_TEXTURE_2D , ret->textureId);
         glGenerateMipmap(GL_TEXTURE_2D);
