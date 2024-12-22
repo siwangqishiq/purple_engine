@@ -43,4 +43,5 @@ private:
     void testInputEvent1();
 
     void testCustomWidget();
+    void testCustomWidget2();
 };

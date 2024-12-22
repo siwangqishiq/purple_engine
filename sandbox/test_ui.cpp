@@ -544,7 +544,8 @@ void TestUi::onInit(){
     // testContainerCompose3();
 
     // testInputEvent1();
-    testCustomWidget();
+    // testCustomWidget();
+    testCustomWidget2();
 }
 
 void TestUi::testContainerCompose2(){
@@ -954,11 +955,132 @@ void TestUi::testCustomWidget(){
 
     ui->setRootContainer(rootContainer);
     
-    auto customWidget = std::make_shared<CustomWidget>(100, 100);
+    auto customWidget = std::make_shared<CustomWidget>(200, 200);
     customWidget->setBackgroundColor<Widget>(ConverColorValue(Color::Pink));
     customWidget->setLayoutGravity<Widget>(LayoutGravity::Center);
 
     rootContainer->addChild(customWidget);
+}
+
+void TestUi::testCustomWidget2(){
+    using namespace purple;
+
+    auto container = std::make_shared<ColumContainer>();
+    container->setBackgroundColor<ColumContainer>(ConverColorValue(Color::White))
+        .setPadding<ColumContainer>(0,0,0,0);
+    
+    auto headContainer = std::make_shared<RowContainer>(LAYOUT_MATCH_PARENT,100);
+    headContainer->setBackgroundColor<RowContainer>(ConverColorValue(Color::Blue));
+    container->addChild(headContainer);
+
+    auto contentContainer = std::make_shared<ColumContainer>(LAYOUT_MATCH_PARENT,LAYOUT_UNSET);
+    contentContainer->setBackgroundColor<ColumContainer>(ConverColorValue(Color::Purple))
+        .setLayoutWeight<ColumContainer>(1)
+        .setPadding<ColumContainer>(20,20,20,20)
+        .setId<ColumContainer>("error_ColumContainer");
+    container->addChild(contentContainer);
+
+    auto imgTexture1 = purple::ImageSource::fromAsset("img/small.png");
+    auto imgTexture2 = purple::ImageSource::fromAsset("img/g2.jpg");
+    auto imgTexture3= purple::ImageSource::fromAsset("img/t2.jpg");
+    auto imgTexture4= purple::ImageSource::fromAsset("img/more_height.jpg");
+
+    auto contentRowChild1 = std::make_shared<RowContainer>(LAYOUT_MATCH_PARENT,LAYOUT_UNSET);
+    contentRowChild1->setLayoutWeight<RowContainer>(1)
+        .setBackgroundColor<RowContainer>(ConverColorValue(Color::Blue));
+    contentContainer->addChild(contentRowChild1);
+
+    auto img1 = std::make_shared<Img>(imgTexture1 , LAYOUT_UNSET,LAYOUT_MATCH_PARENT);
+    img1->setLayoutWeight<Img>(1)
+        .setScaleMode<Img>(ImgScale::CenterCrop)
+        .setBackgroundColor<Img>(ConverColorValue(Color::Gray));
+    contentRowChild1->addChild(img1);
+
+    auto img2 = std::make_shared<Img>(imgTexture2 , LAYOUT_UNSET,LAYOUT_MATCH_PARENT);
+    img2->setLayoutWeight<Img>(1)
+        .setScaleMode<Img>(ImgScale::CenterCrop)
+        .setMargin<Img>(10,10,10,10)
+        .setBackgroundColor<Img>(ConverColorValue(Color::Green));
+    contentRowChild1->addChild(img2);
+
+    auto contentRowChild2 = std::make_shared<RowContainer>(LAYOUT_MATCH_PARENT,LAYOUT_UNSET);
+    contentRowChild2->setLayoutWeight<RowContainer>(1)
+        .setBackgroundColor<RowContainer>(ConverColorValue(Color::SkyBlue));
+    contentContainer->addChild(contentRowChild2);
+    
+    auto img3 = std::make_shared<Img>(imgTexture3 , LAYOUT_UNSET,LAYOUT_MATCH_PARENT);
+    img3->setLayoutWeight<Img>(1)
+        .setScaleMode<Img>(ImgScale::CenterCrop)
+        .setBackgroundColor<Img>(ConverColorValue(Color::Yellow));
+    contentRowChild2->addChild(img3);
+
+    // auto img4 = std::make_shared<Img>(imgTexture4 , LAYOUT_UNSET,LAYOUT_MATCH_PARENT);
+    // img4->setLayoutWeight<Img>(1)
+    //     .setScaleMode<Img>(ImgScale::CenterCrop)
+    //     .setBackgroundColor<Img>(ConverColorValue(Color::Red));
+    // contentRowChild2->addChild(img4);
+
+    auto customWidget = std::make_shared<CustomWidget>(LAYOUT_UNSET,LAYOUT_MATCH_PARENT);
+    customWidget->setLayoutWeight<CustomWidget>(1)
+        .setBackgroundColor<CustomWidget>(ConverColorValue(Color::Red));
+    contentRowChild2->addChild(customWidget);
+
+    const int bottomHeight = 60;
+    auto footContainer = std::make_shared<RowContainer>(LAYOUT_MATCH_PARENT,bottomHeight);
+    footContainer->setBackgroundColor<RowContainer>(ConverColorValue(Color::SkyBlue));
+    container->addChild(footContainer);
+
+    auto tab1 = std::make_shared<Text>(L"第一个",LAYOUT_UNSET,LAYOUT_MATCH_PARENT);
+    tab1->setFontColor<Text>(ConverColorValue(Color::Black))
+        .setBackgroundColor<Text>(ConverColorValue(Color::SkyBlue))
+        .setTextGravity<Text>(TextGravity::Center)
+        .setId<Text>("tab1")
+        .setFontSize<Text>(bottomHeight / 2.0f)
+        .setFontWeight<Text>(80.0f)
+        .setLayoutWeight<Text>(1);
+    footContainer->addChild(tab1);
+    // footContainer->setVisible(VisibleState::Gone);
+
+    auto tab2 = std::make_shared<Text>(L"第二个",LAYOUT_UNSET,LAYOUT_MATCH_PARENT);
+    tab2->setFontColor<Text>(ConverColorValue(Color::Black))
+        .setBackgroundColor<Text>(ConverColorValue(Color::Yellow))
+        .setTextGravity<Text>(TextGravity::Center)
+        .setId<Text>("tab2")
+        .setFontSize<Text>(bottomHeight / 2.0f)
+        .setFontWeight<Text>(80.0f)
+        .setLayoutWeight<Text>(1);
+    footContainer->addChild(tab2);
+
+    auto tab3 = std::make_shared<Text>(L"第三个",LAYOUT_UNSET,LAYOUT_MATCH_PARENT);
+    tab3->setFontColor<Text>(ConverColorValue(Color::Black))
+        .setBackgroundColor<Text>(glm::vec4(0.0f , 0.0f ,1.0f , 1.0f))
+        .setTextGravity<Text>(TextGravity::Center)
+        .setId<Text>("tab3")
+        .setFontSize<Text>(bottomHeight / 2.0f)
+        .setFontWeight<Text>(80.0f)
+        .setLayoutWeight<Text>(1);
+    footContainer->addChild(tab3);
+
+    auto tab4 = std::make_shared<Text>(L"第四个",LAYOUT_UNSET,LAYOUT_MATCH_PARENT);
+    tab4->setFontColor<Text>(ConverColorValue(Color::Black))
+        .setBackgroundColor<Text>(ConverColorValue(Color::White))
+        .setTextGravity<Text>(TextGravity::Center)
+        .setId<Text>("tab4")
+        .setFontSize<Text>(bottomHeight / 2.0f)
+        .setFontWeight<Text>(80.0f)
+        .setLayoutWeight<Text>(1);
+    footContainer->addChild(tab4);
+
+    auto headText = std::make_shared<Text>(L"我是标题",LAYOUT_MATCH_PARENT,LAYOUT_MATCH_PARENT);
+    headText->setMargin<Text>(20,0,0,0)
+        .setTextGravity<Text>(TextGravity::CenterLeft)
+        .setFontColor<Text>(ConverColorValue(Color::Black));
+    headContainer->addChild(headText);
+
+    ui->setRootContainer(container);
+    
+    UiRoot* uiRoot = tab4->findRootUi();
+    Log::i("TestUI","find root is %ld , uiroot : %ld" , uiRoot , ui.get());
 }
 
 void TestUi::onTick(){
