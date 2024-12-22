@@ -63,7 +63,7 @@ namespace purple{
     void CustomWidget::renderContent(int widgetWidth , int widgetHeight){
         // Log::i("ui", "CustomWidget::renderContent ...");
         auto render = purple::Engine::getRenderEngine();
-
+        
         auto shapeBatch = render->getShapeBatch();
         shapeBatch->begin();
         Paint paint;
@@ -71,5 +71,13 @@ namespace purple{
         Rect rect(0, widgetHeight , widgetWidth , widgetHeight);
         shapeBatch->renderRect(rect, paint);
         shapeBatch->end();
+        
+        paint.stokenWidth = 10.0f;
+        paint.color = ConverColorValue(Color::Black);
+        std::vector<float> linesData = {0.0f, 0.0f , 
+            static_cast<float>(widgetWidth), static_cast<float>(widgetHeight),
+            0.0f, static_cast<float>(widgetHeight),
+             static_cast<float>(widgetWidth), 0.0f};
+        render->renderSmoothLines(linesData, paint);
     }
 }
