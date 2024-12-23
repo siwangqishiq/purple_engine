@@ -147,6 +147,8 @@ namespace purple{
             return this->requestHeight_;
         }
 
+        bool isSizeValueLegal(int size);
+
         Rect getWidgetRect();
 
         UiRoot* findRootUi();

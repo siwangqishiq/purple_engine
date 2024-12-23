@@ -91,6 +91,10 @@ namespace purple{
         onRender();
     }
 
+    bool Widget::isSizeValueLegal(int size){
+        return size > 0 && size < WIDGET_MAX_SIZE;
+    }
+
     Rect Widget::getWidgetRect(){
         const int l = this->left;
         const int t = this->top;

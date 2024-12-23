@@ -12,22 +12,25 @@
 ### UI库 Ver1.0
 
 - 基类 
-  - Widget 基础类
-  - Container 布局基类 绝对布局
+  - ~~Widget 基础类~~
+  - ~~Container 布局基类 绝对布局~~
 
 - 显示组件
-    - Text 文本显示 
-    - Image 图片 加载本地Asset图片
+    - ~~Text 文本显示 ~~
+    - ~~Image 图片 加载本地Asset图片~~
     - Button 按钮 点击事件
+    - ProgressBar 
+    - SeekBar 
+    - Switcher 开关
 
 - 布局
-    - ColumnContainer 垂直布局
-    - RowContainer 水平布局
-    - StackContainer 层叠布局 
+    - ~~ColumnContainer 垂直布局~~
+    - ~~RowContainer 水平布局~~
+    - ~~StackContainer 层叠布局 ~~
     
 
 - 事件分发 
-    - 点击事件
+    - ~~点击事件~~
 
 
 ### UI库 Ver2.0

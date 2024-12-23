@@ -10,8 +10,9 @@ namespace purple{
     const int LAYOUT_UNSET = -3;
 
     //控件最大宽高
-    const int WIDGET_MAX_WIDTH = 100000000;
-    const int WIDGET_MAX_HEIGHT = 100000000;
+    const int WIDGET_MAX_SIZE = 200000000;
+    const int WIDGET_MAX_WIDTH = WIDGET_MAX_SIZE;
+    const int WIDGET_MAX_HEIGHT = WIDGET_MAX_SIZE;
 
     //测量模式
     enum MeasureSpecMode{
