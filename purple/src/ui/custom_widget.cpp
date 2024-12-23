@@ -34,7 +34,7 @@ namespace purple{
 
     void CustomWidget::buildVirtualTexture(){
         // std::cout << "width = " << width_ << "  height = " << height_ << std::endl;
-
+        
         if(isSizeValueLegal(width_) && isSizeValueLegal(height_) && virtualTexture == nullptr){
             auto render = purple::Engine::getRenderEngine();
             virtualTexture = render->buildVirtualTexture(this->texId , width_ , height_ , nullptr);
@@ -82,5 +82,11 @@ namespace purple{
              0.0f, static_cast<float>(widgetHeight),
               static_cast<float>(widgetWidth), 0.0f};
          render->renderSmoothLines(linesData, paint);
+    }
+
+    CustomWidget::~CustomWidget(){
+        if(virtualTexture != nullptr){
+            TextureManager::getInstance()->freeTexture(*virtualTexture);
+        }
     }
 }

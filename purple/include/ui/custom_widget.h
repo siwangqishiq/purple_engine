@@ -20,6 +20,7 @@ namespace purple{
 
         virtual void renderContent(int widgetWidth , int widgetHeight);
 
+        virtual ~CustomWidget();
     private:
         std::shared_ptr<TextureInfo> virtualTexture = nullptr;
         std::string texId = "CustomWidget";
