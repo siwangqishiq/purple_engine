@@ -69,7 +69,7 @@ namespace purple{
             int widthValue = 0;
             if(pWidget->getRequestWidth() == LAYOUT_MATCH_PARENT){
                 widthMode = MeasureSpecMode::Exactly;
-                widthValue = std::max(0, parentLimitWidth);
+                widthValue = std::max(0, parentLimitWidth - pWidget->getMarginHorizontal());
             }else if(pWidget->getRequestWidth() == LAYOUT_WRAP_CONTENT){
                 widthMode = MeasureSpecMode::Atmost;
                 widthValue = parentLimitWidth;
@@ -83,7 +83,7 @@ namespace purple{
             int heightValue = 0;
             if(pWidget->getRequestHeight() == LAYOUT_MATCH_PARENT){
                 heightMode = MeasureSpecMode::Exactly;
-                heightValue = std::max(0, parentLimitHeight);
+                heightValue = std::max(0, parentLimitHeight - pWidget->getMarginVertical());
             }else if(pWidget->getRequestHeight() == LAYOUT_WRAP_CONTENT){
                 heightMode = MeasureSpecMode::Atmost;
                 heightValue = parentLimitHeight;

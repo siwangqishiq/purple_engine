@@ -11,3 +11,6 @@
 #include "ui/img.h"
 #include "ui/text.h"
 #include "ui/custom_widget.h"
+#include "ui/switcher.h"
+#include "ui/progressbar.h"
+#include "ui/seekbar.h"

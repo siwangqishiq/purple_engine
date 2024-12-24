@@ -25,7 +25,8 @@ void TestImgUi::onInit(){
     // testImgScaleMode2();
     // testImgScaleMode3();
     // testImgScaleMode4();
-    testImgScaleMode5();
+    // testImgScaleMode5();
+    testSeekbar();
 
     if(bgm != nullptr){
         return;
@@ -52,6 +53,20 @@ void TestImgUi::onInit(){
 
 void TestImgUi::onResize(int w , int h){
     onInit();
+}
+
+void TestImgUi::testSeekbar(){
+    using namespace purple;
+
+    auto container = std::make_shared<StackContainer>(LAYOUT_MATCH_PARENT, LAYOUT_MATCH_PARENT);
+    container->setBackgroundColor<StackContainer>(ConverColorValue(Color::SkyBlue));
+
+    auto seekbar = std::make_shared<SeekBar>(LAYOUT_MATCH_PARENT,30);
+    seekbar->setLayoutGravity<SeekBar>(LayoutGravity::Center)
+        .setMargin<SeekBar>(30,0,30,0);
+    container->addChild(seekbar);
+
+    ui->setRootContainer(container);
 }
 
 void TestImgUi::testImg(){

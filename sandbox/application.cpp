@@ -17,6 +17,20 @@
 int Application::fps = 0;
 bool isFullScreen = false;
 
+void Application::onCreate(){
+    purple::Engine::getTimer()->scheduleAtFixedRate([this](void *app){
+        fpsStr = std::to_wstring(fps);
+        purple::Log::w("fps" , "fps : %d" , fps);
+        fps = 0;
+    } , 1000L);
+    
+    // appInstanceList.push_back(std::make_shared<Test1App>());
+    // appInstanceList.push_back(std::make_shared<TestTextRender>());
+    // appInstanceList.push_back(std::make_shared<TestUi>());
+    appInstanceList.push_back(std::make_shared<TestImgUi>());
+    // appInstanceList.push_back(std::make_shared<TestTextUi>());
+}
+
 void Application::init(){
     purple::Log::i(TAG , "Application init");
     glfwInit();
@@ -160,21 +174,6 @@ void Application::init(){
         app->onInit();
     }//end for each
 }
-
-void Application::onCreate(){
-    purple::Engine::getTimer()->scheduleAtFixedRate([this](void *app){
-        fpsStr = std::to_wstring(fps);
-        purple::Log::w("fps" , "fps : %d" , fps);
-        fps = 0;
-    } , 1000L);
-    
-    // appInstanceList.push_back(std::make_shared<Test1App>());
-    // appInstanceList.push_back(std::make_shared<TestTextRender>());
-    appInstanceList.push_back(std::make_shared<TestUi>());
-    // appInstanceList.push_back(std::make_shared<TestImgUi>());
-    // appInstanceList.push_back(std::make_shared<TestTextUi>());
-}
-
 
 void Application::tick(){
     // std::cout << " begin tick" << std::endl;

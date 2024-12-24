@@ -45,7 +45,7 @@ namespace purple{
         }else if(widthSpecMode == MeasureSpecMode::Unset){
             setHeight(0);
         }
-
+        
         // Log::i("ui","Image Widget measue size %d , %d   %s" , width_ , height_ , this->id.c_str());
     }
             

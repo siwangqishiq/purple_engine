@@ -29,4 +29,6 @@ private:
     void testImgScaleMode4();
 
     void testImgScaleMode5();
+
+    void testSeekbar();
 };
