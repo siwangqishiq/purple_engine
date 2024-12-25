@@ -28,13 +28,13 @@ namespace purple{
 
         template<typename T>
         T& setMinValue(float minValue){
-            this->setMinValue = minValue;
+            this->progressMinValue = minValue;
             return static_cast<T&>(*this);
         }
 
         template<typename T>
         T& setMaxValue(float maxValue){
-            this->setMaxValue = maxValue;
+            this->progressMaxValue = maxValue;
             return static_cast<T&>(*this);
         }
 

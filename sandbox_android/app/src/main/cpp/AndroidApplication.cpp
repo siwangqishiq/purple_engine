@@ -18,8 +18,8 @@ void AndroidApplication::init(){
 
     // appInstanceList.push_back(std::make_shared<Test1App>());
     // appInstanceList.push_back(std::make_shared<TestTextRender>());
-     appInstanceList.push_back(std::make_shared<TestUi>());
-    // appInstanceList.push_back(std::make_shared<TestImgUi>());
+//     appInstanceList.push_back(std::make_shared<TestUi>());
+     appInstanceList.push_back(std::make_shared<TestImgUi>());
 //    appInstanceList.push_back(std::make_shared<TestTextUi>());
     
     for(std::shared_ptr<purple::IApp> &app : appInstanceList){
