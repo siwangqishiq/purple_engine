@@ -61,7 +61,7 @@ namespace purple{
         float t = midY + barHeight / 2.0f;
         Rect barRect(barOffsetX , t , barWidth , barHeight);
         shapeBatch->renderRoundRect(barRect , barHeight / 2.0f, paint);
-        
+
         paint.color = inidicatorColor;
         shapeBatch->renderCircle(barOffsetX + convertProgressToWidth(), midY, indicatorRadius, paint);
         shapeBatch->end();
@@ -103,7 +103,7 @@ namespace purple{
 
     bool SeekBar::onInputEvent(InputEvent &event){
         const int action = event.action;
-        const std::tuple xy = inputCoordsToLocal(event.x, event.y);
+        auto xy = inputCoordsToLocal(event.x, event.y);
         const float x = std::get<0>(xy);
         const float y = std::get<1>(xy);
         
