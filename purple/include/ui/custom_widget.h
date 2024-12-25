@@ -3,6 +3,7 @@
 #include "ui/widget.h"
 #include "render/texture.h"
 #include <memory>
+#include <tuple>
 
 namespace purple{
     class CustomWidget : public Widget {
@@ -21,12 +22,15 @@ namespace purple{
         virtual void renderContent(int widgetWidth , int widgetHeight);
 
         virtual ~CustomWidget();
+
+        std::tuple<float , float> inputCoordsToLocal(float x , float y);
+    protected:
+        void buildVirtualTexture();
+    
     private:
         std::shared_ptr<TextureInfo> virtualTexture = nullptr;
         std::string texId = "CustomWidget";
 
         void regenerateTexId();
-        
-        void buildVirtualTexture();
     };
 }

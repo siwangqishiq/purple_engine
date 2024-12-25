@@ -58,15 +58,41 @@ void TestImgUi::onResize(int w , int h){
 void TestImgUi::testSeekbar(){
     using namespace purple;
 
-    auto container = std::make_shared<StackContainer>(LAYOUT_MATCH_PARENT, LAYOUT_MATCH_PARENT);
-    container->setBackgroundColor<StackContainer>(ConverColorValue(Color::SkyBlue));
-
-    auto seekbar = std::make_shared<SeekBar>(LAYOUT_MATCH_PARENT,30);
-    seekbar->setLayoutGravity<SeekBar>(LayoutGravity::Center)
-        .setMargin<SeekBar>(30,0,30,0);
-    container->addChild(seekbar);
+    auto container = std::make_shared<ColumContainer>(LAYOUT_MATCH_PARENT, LAYOUT_MATCH_PARENT);
+    container->setBackgroundColor<ColumContainer>(ConverColorValue(Color::White));
 
     ui->setRootContainer(container);
+
+    auto seekbar = std::make_shared<SeekBar>(LAYOUT_MATCH_PARENT,20);
+    seekbar->setMargin<SeekBar>(30,100,30,0);
+    container->addChild(seekbar);
+
+    auto seekbar2 = std::make_shared<SeekBar>(purple::Engine::ScreenWidth / 2.0f,30);
+    seekbar2->setMargin<SeekBar>(30,100,30,0)
+        .setLayoutGravity<SeekBar>(LayoutGravity::Center)
+        .setBarColor<SeekBar>(ConverColorValue(Color::Pink))
+        .setIndicatorColor<SeekBar>(ConverColorValue(Color::Red));
+    container->addChild(seekbar2);
+
+    auto text1 = std::make_shared<Text>(L"0",LAYOUT_WRAP_CONTENT,LAYOUT_WRAP_CONTENT);
+    text1->setFontColor<Text>(ConverColorValue(Color::Black))
+        .setFontSize<Text>(200.0f)
+        .setLayoutGravity<SeekBar>(LayoutGravity::Center)
+        .setMargin<Text>(0,100,0,0)
+        .setFontWeight<Text>(90.0f);
+
+    auto seekbar3 = std::make_shared<SeekBar>(LAYOUT_MATCH_PARENT,20);
+    seekbar3->setMargin<SeekBar>(30,100,30,0)
+        .setProgressUpdate<SeekBar>([seekbar , seekbar2 , text1](float value , float oldValue , bool isManual){
+            seekbar2->setProgress(value);
+            seekbar->setProgress(value);
+
+            std::wstring progressStr = L"" + std::to_wstring(static_cast<int>(value));
+            text1->setText(progressStr);
+        });
+    container->addChild(seekbar3);
+
+    container->addChild(text1);
 }
 
 void TestImgUi::testImg(){

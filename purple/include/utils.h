@@ -7,6 +7,7 @@
 #include <iostream>
 #include "render/common.h"
 
+
 namespace purple{
     
     std::string date_time(std::time_t posix);
@@ -18,6 +19,12 @@ namespace purple{
     void ScaleWithPoint(Point &point , float scale, Point center);
 
     void Rotate(Point &point, float cx , float cy , float angle);
+
+    float RoundToTwoDecimal(float num);
+
+    bool PointInCircle(float x , float y , float cx , float cy , float radius);
+
+    float Clamp(float x ,float min , float max);
 }
 
 

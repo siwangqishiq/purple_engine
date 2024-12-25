@@ -15,7 +15,7 @@ namespace purple{
         SkyBlue,
         Silver,
         Gray,
-        Pink
+        Pink,
     };
 
     glm::vec4 ConverColorValue(Color color);

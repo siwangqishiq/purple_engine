@@ -171,6 +171,8 @@ namespace purple{
         float textureCoords[5];
         unsigned int textureId;
     };
+
+    typedef glm::vec4 ColorType;
 }
 
 

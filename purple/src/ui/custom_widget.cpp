@@ -30,7 +30,7 @@ namespace purple{
         }
         
         buildVirtualTexture();
-    } 
+    }
 
     void CustomWidget::buildVirtualTexture(){
         // std::cout << "width = " << width_ << "  height = " << height_ << std::endl;
@@ -82,6 +82,12 @@ namespace purple{
              0.0f, static_cast<float>(widgetHeight),
               static_cast<float>(widgetWidth), 0.0f};
          render->renderSmoothLines(linesData, paint);
+    }
+
+    std::tuple<float , float> CustomWidget::inputCoordsToLocal(float inputX , float inputY){
+        return std::tuple<float , float>(
+            inputX - left,
+            inputY - top + getHeight());
     }
 
     CustomWidget::~CustomWidget(){

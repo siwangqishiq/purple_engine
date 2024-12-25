@@ -1,4 +1,5 @@
 #include "utils.h"
+#include <cmath>
 
 namespace purple{
     std::string date_time(std::time_t posix){
@@ -56,5 +57,25 @@ namespace purple{
 
         p.x = x;
         p.y = y;
+    }
+
+    float RoundToTwoDecimal(float num){
+        return std::round(num * 100.0) / 100.0;
+    }
+
+    bool PointInCircle(float x , float y , float cx , float cy , float radius){
+        const float dx = (cx - x);
+        const float dy = (cy - y);
+        return dx * dx + dy * dy <=  radius * radius;
+    }
+
+    float Clamp(float x ,float min , float max){
+        if(x < min){
+            return min;
+        }else if(x > max){
+            return max;
+        }else{
+            return x;
+        }
     }
 }

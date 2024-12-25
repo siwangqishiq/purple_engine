@@ -143,8 +143,6 @@ namespace purple{
             case EVENT_ACTION_BEGIN:
                 if(needEatInputBeginEvent()){
                     ret = true;
-                    setSelfUiRootTarget();
-                    
                     // if(rect.isPointInRect(x, y)){ 
                     //     ret = true;
                     // }
@@ -179,8 +177,15 @@ namespace purple{
         if(visible_ != VisibleState::Normal){
             return false;
         }
-        
-        return onInputEvent(event);
+
+        if(event.action == EVENT_ACTION_BEGIN){
+            const bool isCost = onInputEvent(event);
+            if(isCost){
+                setSelfUiRootTarget();
+            }
+            return isCost;
+        }
+        return false;
     }
 }
 
