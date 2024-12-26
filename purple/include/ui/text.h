@@ -26,6 +26,10 @@ namespace purple{
             content_ = content;
         }
 
+        virtual void setText(const std::wstring &content){
+            content_ = content;
+        }
+
         template<typename T>
         T& setFontColor(glm::vec4 fontColor){
             textPaint_.textColor = fontColor;

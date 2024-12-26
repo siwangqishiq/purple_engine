@@ -7,6 +7,7 @@ file -> object for render or play
 - Windwos 
 - Linux
 - MacOS
+- Raspiberry
 
 ### 构建工具 
 - cmake

@@ -59,7 +59,9 @@ namespace purple{
     protected:
         bool canManualUpdate = true; //是否可以手动拖拽
 
-    private:
+        glm::vec4 barColor;
+        glm::vec4 inidicatorColor;
+
         float progressMinValue = 0.0f;
         float progressMaxValue = 100.0f;
         float progress = 0.0f;
@@ -69,18 +71,17 @@ namespace purple{
         float barHeight = 0.0f;
         float barWidth = 0.01f;
 
-        glm::vec4 barColor;
-        glm::vec4 inidicatorColor;
-
         void putSeekbarParams();
 
         float convertProgressToWidth();
-        float convertLenToProgressValue(float lenValue);
 
+        float convertLenToProgressValue(float lenValue);
+        
         void fireUpdateCallback(float curValue , float oldValue , bool isManual);
         
         void setProgressInner(float newProgress , bool manual);
 
         SeekBarUpdateFunc seekbarUpdateFn = nullptr;
+    private:
     };
 }

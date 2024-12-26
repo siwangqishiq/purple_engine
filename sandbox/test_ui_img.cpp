@@ -26,29 +26,8 @@ void TestImgUi::onInit(){
     // testImgScaleMode3();
     // testImgScaleMode4();
     // testImgScaleMode5();
-    testSeekbar();
-
-    if(bgm != nullptr){
-        return;
-    }
-    
-    std::string audioPath = "audio/heishenhua.mp3";
-    bgm = purple::AudioManager::getInstance()->loadAudioEntity(audioPath,false);
-
-    std::string audioPath2 = "audio/test.mp3";
-    bgm2 = purple::AudioManager::getInstance()->loadAudioEntity(audioPath2,false);
-
-
-    purple::AudioManager::getInstance()->setAudioPlayEndCallback(bgm, [this](std::string name){
-        purple::AudioManager::getInstance()->playAudioEntity(this->bgm2);
-    });
-
-    purple::AudioManager::getInstance()->setAudioPlayEndCallback(bgm2, [this](std::string name){
-        purple::AudioManager::getInstance()->playAudioEntity(this->bgm);
-    });
-    
-    // // purple::AudioManager::getInstance()->playAudioEntity(bgm);
-    purple::AudioManager::getInstance()->playAudioEntity(bgm2);
+    // testSeekbar();
+    testProgressBar();
 }
 
 void TestImgUi::onResize(int w , int h){
@@ -86,13 +65,57 @@ void TestImgUi::testSeekbar(){
         .setProgressUpdate<SeekBar>([seekbar , seekbar2 , text1](float value , float oldValue , bool isManual){
             seekbar2->setProgress(value);
             seekbar->setProgress(value);
-
-            std::wstring progressStr = L"" + std::to_wstring(static_cast<int>(value));
-            text1->setText(progressStr);
+            text1->setText(std::to_wstring(static_cast<int>(value)));
         });
     container->addChild(seekbar3);
 
     container->addChild(text1);
+}
+
+void TestImgUi::testProgressBar(){
+    using namespace purple;
+
+    auto container = std::make_shared<ColumContainer>(LAYOUT_MATCH_PARENT, LAYOUT_MATCH_PARENT);
+    container->setBackgroundColor<ColumContainer>(ConverColorValue(Color::White));
+
+    ui->setRootContainer(container);
+
+    auto progressBar = std::make_shared<ProgressBar>(LAYOUT_MATCH_PARENT,60);
+    progressBar->setMargin<ProgressBar>(30,100,30,0);
+    container->addChild(progressBar);
+
+    auto seekbar3 = std::make_shared<ProgressBar>(purple::Engine::ScreenWidth / 2.0f,20);
+    seekbar3->setMargin<ProgressBar>(30,100,30,0);
+    container->addChild(seekbar3);
+
+    purple::Engine::getTimer()->scheduleAtFixedRate([this, progressBar](void *params){
+        this->progressValue = (this->progressValue + 1) % 100;
+        progressBar->setProgress(static_cast<float>(this->progressValue));
+    },20);
+}
+
+void TestImgUi::playBgmMusic(){
+    if(bgm != nullptr){
+        return;
+    }
+    
+    // std::string audioPath = "audio/heishenhua.mp3";
+    // bgm = purple::AudioManager::getInstance()->loadAudioEntity(audioPath,false);
+
+    // std::string audioPath2 = "audio/test.mp3";
+    // bgm2 = purple::AudioManager::getInstance()->loadAudioEntity(audioPath2,false);
+
+
+    // purple::AudioManager::getInstance()->setAudioPlayEndCallback(bgm, [this](std::string name){
+    //     purple::AudioManager::getInstance()->playAudioEntity(this->bgm2);
+    // });
+
+    // purple::AudioManager::getInstance()->setAudioPlayEndCallback(bgm2, [this](std::string name){
+    //     purple::AudioManager::getInstance()->playAudioEntity(this->bgm);
+    // });
+    
+    // // // purple::AudioManager::getInstance()->playAudioEntity(bgm);
+    // purple::AudioManager::getInstance()->playAudioEntity(bgm2);
 }
 
 void TestImgUi::testImg(){

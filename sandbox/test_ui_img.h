@@ -31,4 +31,11 @@ private:
     void testImgScaleMode5();
 
     void testSeekbar();
+    void testProgressBar();
+
+
+
+    void playBgmMusic();
+
+    int progressValue = 0;
 };
