@@ -106,9 +106,6 @@ namespace purple{
         //三角形绘制
         void renderTriangles(std::vector<float> &data ,glm::mat4 &transMat, Paint &paint);
 
-        //绘制单独的一个矩形
-        void renderRect(Rect &rect , glm::mat4 &transMat , Paint &paint);
-
         //绘制文字
         void renderText(
             std::wstring &text , 
@@ -216,6 +213,17 @@ namespace purple{
             std::wstring textcopy = text;
             renderTextWithRectV2(textcopy , showRect , paint ,outInfo);
         }
+
+        //绘制单独的一个矩形
+        void renderRect(Rect &rect , glm::mat4 &transMat , Paint &paint);
+        
+        void renderRoundRect(Rect &rect , 
+            float leftTopRadius,
+            float rightTopRadius,
+            float leftBottomRadius,
+            float rightBottomRadius,
+            glm::mat4 &transMat , 
+            Paint &paint);
 
         std::shared_ptr<VRamManager> vramManager_;
     private:

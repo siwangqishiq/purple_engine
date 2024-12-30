@@ -28,4 +28,6 @@ private:
     void test_triangle();
 
     void test_boolops();
+
+    void testRenderRect();
 };

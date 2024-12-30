@@ -35,6 +35,8 @@ void Test1App::onTick(){
 //      test_rect();
     // test_triangle();
 //    test_boolops();
+
+    testRenderRect();
     mTime += 0.02f;
 }
 
@@ -171,5 +173,10 @@ void Test1App::test1(){
     // batch->renderRect(rect , rectPaint);
     // batch->renderCircle(purple::Engine::ScreenWidth / 2.0f , purple::Engine::ScreenHeight / 2.0f , rect.height / 2.0f , rectPaint);
     // batch->end();
+}
+
+void Test1App::testRenderRect(){
+    using namespace purple;
+    purple::Engine::getRenderEngine()->renderRect();
 }
 

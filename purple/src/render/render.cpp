@@ -585,6 +585,17 @@ namespace purple{
             cmd.runCommands();
         }
     }
+    
+    void RenderEngine::renderRoundRect(
+            Rect &rect , 
+            float leftTopRadius,
+            float rightTopRadius,
+            float leftBottomRadius,
+            float rightBottomRadius,
+            glm::mat4 &transMat , 
+            Paint &paint){
+        
+    }
 
     void RenderEngine::renderArc(float cx , float cy , float radius , 
                 float beginAngle ,float endAngle , bool isReverse , Paint &paint){
