@@ -32,8 +32,7 @@ private:
 
     void testSeekbar();
     void testProgressBar();
-
-
+    void testSwitcher();
 
     void playBgmMusic();
 

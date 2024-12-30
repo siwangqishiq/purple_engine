@@ -27,7 +27,8 @@ void TestImgUi::onInit(){
     // testImgScaleMode4();
     // testImgScaleMode5();
     // testSeekbar();
-    testProgressBar();
+    // testProgressBar();
+    testSwitcher();
 }
 
 void TestImgUi::onResize(int w , int h){
@@ -92,6 +93,18 @@ void TestImgUi::testProgressBar(){
         this->progressValue = (this->progressValue + 1) % 100;
         progressBar->setProgress(static_cast<float>(this->progressValue));
     },20);
+}
+
+void TestImgUi::testSwitcher(){
+    using namespace purple;
+    
+    auto container = std::make_shared<StackContainer>(LAYOUT_MATCH_PARENT, LAYOUT_MATCH_PARENT);
+    container->setBackgroundColor<StackContainer>(ConverColorValue(Color::White));
+    ui->setRootContainer(container);
+
+    auto switcher = std::make_shared<Switcher>(100, 50);
+    switcher->setLayoutGravity<Switcher>(LayoutGravity::Center);
+    container->addChild(switcher);
 }
 
 void TestImgUi::playBgmMusic(){
