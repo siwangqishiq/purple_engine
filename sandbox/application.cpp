@@ -24,10 +24,10 @@ void Application::onCreate(){
         fps = 0;
     } , 1000L);
     
-    // appInstanceList.push_back(std::make_shared<Test1App>());
+    appInstanceList.push_back(std::make_shared<Test1App>());
     // appInstanceList.push_back(std::make_shared<TestTextRender>());
     // appInstanceList.push_back(std::make_shared<TestUi>());
-    appInstanceList.push_back(std::make_shared<TestImgUi>());
+    // appInstanceList.push_back(std::make_shared<TestImgUi>());
     // appInstanceList.push_back(std::make_shared<TestTextUi>());
 }
 

@@ -1,41 +1,43 @@
 #include "test1_app.h"
 
 #include "purple.h"
+#include "purple_ui.h"
+#include "glm/gtc/matrix_transform.hpp"
 
 void Test1App::onInit(){
     image = purple::BuildImageByAsset(std::string("img/t2.jpg"));
     
-    mCircleSdfShader = purple::ShaderManager::getInstance()
-        ->loadAssetShader("sdf_circle" , "shader/shader_vert.glsl","shader/circle_sdf_frag.glsl");
+    // mCircleSdfShader = purple::ShaderManager::getInstance()
+    //     ->loadAssetShader("sdf_circle" , "shader/shader_vert.glsl","shader/circle_sdf_frag.glsl");
 
-    mSegSdfShader = purple::ShaderManager::getInstance()
-        ->loadAssetShader("sdf_line" , "shader/shader_vert.glsl","shader/segment_sdf_frag.glsl");
+    // mSegSdfShader = purple::ShaderManager::getInstance()
+    //     ->loadAssetShader("sdf_line" , "shader/shader_vert.glsl","shader/segment_sdf_frag.glsl");
 
-    mRectShader = purple::ShaderManager::getInstance()
-        ->loadAssetShader("sdf_rect" , "shader/shader_vert.glsl","shader/rect_sdf_frag.glsl");
+    // mRectShader = purple::ShaderManager::getInstance()
+    //     ->loadAssetShader("sdf_rect" , "shader/shader_vert.glsl","shader/rect_sdf_frag.glsl");
     
-    mUnionShader = purple::ShaderManager::getInstance()
-        ->loadAssetShader("union_rect" , "shader/shader_vert.glsl","shader/union_sdf_frag.glsl");
+    // mUnionShader = purple::ShaderManager::getInstance()
+    //     ->loadAssetShader("union_rect" , "shader/shader_vert.glsl","shader/union_sdf_frag.glsl");
 
-    mTriangleShader = purple::ShaderManager::getInstance()
-        ->loadAssetShader("sdf_triangle" , "shader/shader_vert.glsl" ,"shader/triangle_sdf_frag.glsl");
+    // mTriangleShader = purple::ShaderManager::getInstance()
+    //     ->loadAssetShader("sdf_triangle" , "shader/shader_vert.glsl" ,"shader/triangle_sdf_frag.glsl");
 
     //play music
-    purple::AudioManager::getInstance()->loadAudio("audio/jiangtiandao.mp3","music" , true);
+    // purple::AudioManager::getInstance()->loadAudio("audio/jiangtiandao.mp3","music" , true);
     // purple::AudioManager::getInstance()->loadAudio("/E:/assets/music/S.H.E/bosimao.mp3","music" , true);
-    purple::AudioManager::getInstance()->playAudio("music");
+    // purple::AudioManager::getInstance()->playAudio("music");
 }
 
 
 
 void Test1App::onTick(){
-       test1();
+    //    test1();
 //     test_circle();
 //     test_segment();
 //      test_rect();
     // test_triangle();
 //    test_boolops();
-
+    
     testRenderRect();
     mTime += 0.02f;
 }
@@ -175,8 +177,32 @@ void Test1App::test1(){
     // batch->end();
 }
 
+    float angle = 0.0f;
+
 void Test1App::testRenderRect(){
     using namespace purple;
-    purple::Engine::getRenderEngine()->renderRect();
+    float w = 400.0f;
+    float h = 200.0f;
+    float l = purple::Engine::ScreenWidth / 2.0f - w / 2.0f;
+    float t = purple::Engine::ScreenHeight / 2.0f + h / 2.0f;
+    Rect rect(l, t , w , h);
+    Paint paint;
+    paint.color = ConverColorValue(Color::SkyBlue);
+    paint.fillStyle = FillStyle::Filled;
+    paint.stokenWidth = 10.0f;
+    glm::mat4 matrix(1.0f);
+    
+    float angleInRadians = glm::radians(angle);
+    angle += 0.5f;
+    Point rectCenter = rect.center();
+    // std::cout << "rectCenter " << rectCenter.x << "  " << rectCenter.y << std::endl;
+    glm::vec3 centerPoint(rectCenter.x, rectCenter.y, 0.0f); 
+    matrix = glm::translate(matrix, centerPoint);
+    matrix = glm::rotate(matrix, angleInRadians, glm::vec3(0 , 0 , 1));
+    matrix = glm::translate(matrix, -centerPoint);
+
+    purple::Engine::getRenderEngine()->renderRoundRect(rect, 
+        0.0f, 0.0f , 0.0f , 0.0f, 
+        matrix , paint);
 }
 

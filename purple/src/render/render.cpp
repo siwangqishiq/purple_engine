@@ -21,6 +21,7 @@
 #include "render/cmd/cmd_shape.h"
 #include "render/cmd/cmd_text.h"
 #include "render/cmd/cmd_triangles.h"
+#include "render/cmd/cmd_round_rect.h"
 
 
 namespace purple{
@@ -594,7 +595,9 @@ namespace purple{
             float rightBottomRadius,
             glm::mat4 &transMat , 
             Paint &paint){
-        
+        RoundRectRenderCommand cmd(this);
+        cmd.putParams(rect ,transMat, paint);
+        cmd.runCommands();
     }
 
     void RenderEngine::renderArc(float cx , float cy , float radius , 
