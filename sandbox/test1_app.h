@@ -29,5 +29,6 @@ private:
 
     void test_boolops();
 
+    void testRenderCircle();
     void testRenderRect();
 };

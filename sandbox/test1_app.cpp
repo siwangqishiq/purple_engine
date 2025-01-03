@@ -31,14 +31,15 @@ void Test1App::onInit(){
 
 
 void Test1App::onTick(){
-    //    test1();
+       test1();
 //     test_circle();
 //     test_segment();
 //      test_rect();
     // test_triangle();
 //    test_boolops();
     
-    testRenderRect();
+    // testRenderRect();
+    testRenderCircle();
     mTime += 0.02f;
 }
 
@@ -177,8 +178,20 @@ void Test1App::test1(){
     // batch->end();
 }
 
-    float angle = 0.0f;
+void Test1App::testRenderCircle(){
+    using namespace purple;
+    float cx = purple::Engine::ScreenWidth / 2.0f;
+    float cy = purple::Engine::ScreenHeight / 2.0f;
+    float radius = 120.0f;
+    Paint paint;
+    paint.fillStyle = FillStyle::Stroken;
+    paint.stokenWidth = 20.0f;
+    paint.color = ConverColorValue(Color::SkyBlue);
 
+    purple::Engine::getRenderEngine()->renderCircle(cx, cy , radius , paint);
+}
+
+float angle = 0.0f;
 void Test1App::testRenderRect(){
     using namespace purple;
     float w = 400.0f;

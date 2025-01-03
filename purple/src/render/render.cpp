@@ -22,6 +22,7 @@
 #include "render/cmd/cmd_text.h"
 #include "render/cmd/cmd_triangles.h"
 #include "render/cmd/cmd_round_rect.h"
+#include "render/cmd/cmd_circle.h"
 
 
 namespace purple{
@@ -597,6 +598,12 @@ namespace purple{
             Paint &paint){
         RoundRectRenderCommand cmd(this);
         cmd.putParams(rect ,transMat, paint);
+        cmd.runCommands();
+    }
+
+    void RenderEngine::renderCircle(float cx , float cy , float radius, Paint &paint){
+        CircleRenderCommand cmd(this);
+        cmd.putParams(cx, cy, radius , paint);
         cmd.runCommands();
     }
 

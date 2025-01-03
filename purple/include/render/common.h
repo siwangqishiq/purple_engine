@@ -151,7 +151,9 @@ namespace purple{
     struct Paint{
         glm::vec4 color = glm::vec4(1.0f , 1.0f , 1.0f , 1.0f);
         FillStyle fillStyle = Filled;
+        
         float stokenWidth = 1.0f;
+        float blurRadius = 0.0f;//阴影半径
     };
 
     inline bool isPointInRect(Rect &rect,float x , float y){

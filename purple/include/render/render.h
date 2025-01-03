@@ -225,6 +225,9 @@ namespace purple{
             glm::mat4 &transMat , 
             Paint &paint);
 
+        //绘制圆形
+        void renderCircle(float cx , float cy , float radius, Paint &paint);
+
         std::shared_ptr<VRamManager> vramManager_;
     private:
         std::vector<std::shared_ptr<RenderCommand>> renderCommandList_;
