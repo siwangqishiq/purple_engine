@@ -24,10 +24,10 @@ void Application::onCreate(){
         fps = 0;
     } , 1000L);
     
-    appInstanceList.push_back(std::make_shared<Test1App>());
+    // appInstanceList.push_back(std::make_shared<Test1App>());
     // appInstanceList.push_back(std::make_shared<TestTextRender>());
     // appInstanceList.push_back(std::make_shared<TestUi>());
-    // appInstanceList.push_back(std::make_shared<TestImgUi>());
+    appInstanceList.push_back(std::make_shared<TestImgUi>());
     // appInstanceList.push_back(std::make_shared<TestTextUi>());
 }
 
@@ -42,8 +42,9 @@ void Application::init(){
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_ANY_PROFILE);
     #else
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 6);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 1);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+    glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
     #endif
     
 
@@ -51,6 +52,7 @@ void Application::init(){
 
     // glfwWindowHint(GLFW_DECORATED , GLFW_FALSE); 
     // glfwWindowHint(GLFW_TRANSPARENT_FRAMEBUFFER , GLFW_TRUE);
+    glfwWindowHint(GLFW_COCOA_RETINA_FRAMEBUFFER , GL_FALSE);
 
     GLFWmonitor *mointor = isFullScreen?glfwGetPrimaryMonitor():nullptr;
 
