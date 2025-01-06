@@ -178,6 +178,8 @@ void Test1App::test1(){
     // batch->end();
 }
 
+
+float strokenWidth = 1.0f;
 void Test1App::testRenderCircle(){
     using namespace purple;
     float cx = purple::Engine::ScreenWidth / 2.0f;
@@ -185,9 +187,9 @@ void Test1App::testRenderCircle(){
     float radius = 120.0f;
     Paint paint;
     paint.fillStyle = FillStyle::Stroken;
-    paint.stokenWidth = 20.0f;
+    strokenWidth = 20.0f * glm::sin(mTime) + 20.0f;
+    paint.stokenWidth = strokenWidth;
     paint.color = ConverColorValue(Color::SkyBlue);
-
     purple::Engine::getRenderEngine()->renderCircle(cx, cy , radius , paint);
 }
 
