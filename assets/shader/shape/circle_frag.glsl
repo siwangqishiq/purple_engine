@@ -3,7 +3,7 @@ precision highp float;
 uniform vec4 uColor;
 uniform int uFillType;
 uniform float uStrokenWidth;
-uniform float blurRadius;
+uniform float uShadowSize;
 
 in vec2 originPos;
 in vec4 circleParams;
@@ -22,14 +22,18 @@ float alphaFromSdf(float d, float edge) {
     return smoothstep(edge, -edge, d);
 }
 
+float sdfCircleShadow(vec2 p , vec2 center , float radius , float shadowRadius){
+    return sdfCircle(p, center, radius) - shadowRadius;
+}
+
 void main(){
     vec2 c = vec2(circleParams.xy);
     float radius = circleParams.z;
             
     float sdfValue = 0.0f;
     if(uFillType == FILL){
-        sdfValue = sdfCircle(originPos , c , radius);
-        fragColor = vec4(uColor.rgb, uColor.a * alphaFromSdf(sdfValue , SmoothSize));
+        float edgeValue = sdfCircle(originPos , c , radius);
+        fragColor = vec4(uColor.rgb, uColor.a * alphaFromSdf(edgeValue , SmoothSize));
     }else if(uFillType == STROKEN){
         sdfValue = abs(sdfCircle(originPos , c , radius)) - uStrokenWidth;
         fragColor = vec4(uColor.rgb, uColor.a * alphaFromSdf(sdfValue , SmoothSize));

@@ -65,9 +65,9 @@ namespace purple{
     }
 
     void CircleRenderCommand::fillRect(float cx , float cy , float radius,Paint &paint){
-        float addedRadius = paint.blurRadius;
+        float addedRadius = paint.shadowRadius;
         if(paint.fillStyle == FillStyle::Stroken){
-            addedRadius = paint.stokenWidth + 1.0f;
+            addedRadius += paint.stokenWidth + 1.0f;
         }
 
         const float realRaidus = radius + addedRadius;
@@ -88,7 +88,7 @@ namespace purple{
         shader_.setUniformVec4("uColor" , paint_.color);
         shader_.setUniformInt("uFillType",paint_.fillStyle);
         shader_.setUniformFloat("uStrokenWidth" , paint_.stokenWidth);
-        shader_.setUniformFloat("uShadowSize" , paint_.blurRadius);
+        shader_.setUniformFloat("uShadowSize" , paint_.shadowRadius);
         
         glBindVertexArray(vao_);
         glBindBuffer(GL_ARRAY_BUFFER , vbo_);

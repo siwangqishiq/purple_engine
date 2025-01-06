@@ -187,6 +187,7 @@ void Test1App::testRenderCircle(){
     float radius = 200.0f;
     Paint paint;
     paint.fillStyle = FillStyle::Stroken;
+    paint.shadowRadius = 40.0f;
     strokenWidth = 20.0f * glm::sin(mTime) + 20.0f;
     // std::cout << "strokenWidth = " << strokenWidth << std::endl;
     paint.stokenWidth = strokenWidth;
