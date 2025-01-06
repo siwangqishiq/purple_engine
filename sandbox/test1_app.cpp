@@ -184,7 +184,7 @@ void Test1App::testRenderCircle(){
     using namespace purple;
     float cx = purple::Engine::ScreenWidth / 2.0f;
     float cy = purple::Engine::ScreenHeight / 2.0f;
-    float radius = 120.0f;
+    float radius = 200.0f;
     Paint paint;
     paint.fillStyle = FillStyle::Stroken;
     strokenWidth = 20.0f * glm::sin(mTime) + 20.0f;

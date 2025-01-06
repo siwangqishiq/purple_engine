@@ -15,6 +15,8 @@ if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
 endif()
 
 if(APPLE)
+    set (CMAKE_CXX_FLAGS "-std=c++14") 
+    set (CMAKE_CXX_LINK_EXECUTABLE "${CMAKE_CXX_LINK_EXECUTABLE} -framework Cocoa -framework IOKit -framework CoreVideo -framework OpenGL -framework CoreFoundation -framework CoreAudio -framework AudioToolbox")
     message(STATUS "This macos ")
 endif()
 
@@ -52,7 +54,7 @@ else()
     message(STATUS "This is not a Linux system with ARM architecture")
 endif()
 
-link_libraries(glfw3)
+# link_libraries(glfw3)
 
 add_executable(${PROJECT_NAME} ${SRCS})
 
