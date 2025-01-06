@@ -13,7 +13,7 @@ out vec4 fragColor;
 const int FILL = 0;
 const int STROKEN = 1;
 
-float SmoothSize = 1.0f;
+float SmoothSize = 2.0f;
 
 float sdfCircle(vec2 p , vec2 center , float radius){
     return length(p - center) - radius;
@@ -25,8 +25,7 @@ float alphaFromSdf(float d, float edge) {
 void main(){
     vec2 c = vec2(circleParams.xy);
     float radius = circleParams.z;
-    SmoothSize = max(0.1f, radius / 60.0f);
-    
+            
     float sdfValue = 0.0f;
     if(uFillType == FILL){
         sdfValue = sdfCircle(originPos , c , radius);

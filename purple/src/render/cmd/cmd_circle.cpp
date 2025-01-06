@@ -67,7 +67,7 @@ namespace purple{
     void CircleRenderCommand::fillRect(float cx , float cy , float radius,Paint &paint){
         float addedRadius = paint.blurRadius;
         if(paint.fillStyle == FillStyle::Stroken){
-            addedRadius = paint.stokenWidth;
+            addedRadius = paint.stokenWidth + 1.0f;
         }
 
         const float realRaidus = radius + addedRadius;

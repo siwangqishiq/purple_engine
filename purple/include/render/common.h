@@ -153,7 +153,11 @@ namespace purple{
         FillStyle fillStyle = Filled;
         
         float stokenWidth = 1.0f;
-        float blurRadius = 0.0f;//阴影半径
+        float shadowRadius = 0.0f;//阴影半径
+        
+        //阴影偏移
+        float shadowDx = 0.0f;
+        float shadowDy = 0.0f;
     };
 
     inline bool isPointInRect(Rect &rect,float x , float y){

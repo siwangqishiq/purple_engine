@@ -31,7 +31,7 @@ void Test1App::onInit(){
 
 
 void Test1App::onTick(){
-       test1();
+    //    test1();
 //     test_circle();
 //     test_segment();
 //      test_rect();
@@ -188,9 +188,11 @@ void Test1App::testRenderCircle(){
     Paint paint;
     paint.fillStyle = FillStyle::Stroken;
     strokenWidth = 20.0f * glm::sin(mTime) + 20.0f;
+    // std::cout << "strokenWidth = " << strokenWidth << std::endl;
     paint.stokenWidth = strokenWidth;
-    paint.color = ConverColorValue(Color::SkyBlue);
+    paint.color = ConverColorValue(Color::Red);
     purple::Engine::getRenderEngine()->renderCircle(cx, cy , radius , paint);
+    
 }
 
 float angle = 0.0f;

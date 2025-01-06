@@ -607,6 +607,11 @@ namespace purple{
         cmd.runCommands();
     }
 
+    void RenderEngine::renderCircleShadow(float cx , float cy, 
+        float radius, Paint &paint){
+        
+    }
+
     void RenderEngine::renderArc(float cx , float cy , float radius , 
                 float beginAngle ,float endAngle , bool isReverse , Paint &paint){
         ArcRenderCommand cmd(this);
