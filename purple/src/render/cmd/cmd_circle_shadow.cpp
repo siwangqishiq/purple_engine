@@ -21,6 +21,8 @@ namespace purple{
         const int attrC = attrCount_;
 
         Rect &rect = rect_;
+
+        const float outterRadius = radius + paint_.shadowRadius;
         //v1
         buf[0 * attrC + 0] = rect.left;
         buf[0 * attrC + 1] = rect.top - rect.height;
@@ -29,7 +31,7 @@ namespace purple{
         buf[0 * attrC + 3] = cx;
         buf[0 * attrC + 4] = cy;
         buf[0 * attrC + 5] = radius;
-        buf[0 * attrC + 6] = 0.0f;
+        buf[0 * attrC + 6] = outterRadius;
 
         //v2
         buf[1 * attrC + 0] = rect.left + rect.width;
@@ -39,7 +41,7 @@ namespace purple{
         buf[1 * attrC + 3] = cx;
         buf[1 * attrC + 4] = cy;
         buf[1 * attrC + 5] = radius;
-        buf[1 * attrC + 6] = 0.0f;
+        buf[1 * attrC + 6] = outterRadius;
 
         //v3
         buf[2 * attrC + 0] = rect.left + rect.width;
@@ -49,7 +51,7 @@ namespace purple{
         buf[2 * attrC + 3] = cx;
         buf[2 * attrC + 4] = cy;
         buf[2 * attrC + 5] = radius;
-        buf[2 * attrC + 6] = 0.0f;
+        buf[2 * attrC + 6] = outterRadius;
 
         //v4
         buf[3 * attrC + 0] = rect.left;
@@ -59,19 +61,19 @@ namespace purple{
         buf[3 * attrC + 3] = cx;
         buf[3 * attrC + 4] = cy;
         buf[3 * attrC + 5] = radius;
-        buf[3 * attrC + 6] = 0.0f;
+        buf[3 * attrC + 6] = outterRadius;
 
         buildGlCommands(buf);
     }
 
     void CircleShadowRenderCommand::fillRect(float cx , float cy , float radius,Paint &paint){
-        float addedRadius = paint.shadowRadius;
+        float addedRadius = 2.0f * paint.shadowRadius;
         if(paint.fillStyle == FillStyle::Stroken){
             addedRadius += paint.stokenWidth + 1.0f;
         }
 
         const float realRaidus = radius + addedRadius;
-        std::cout << "CircleShadow realRaidus " << realRaidus << std::endl;
+        // std::cout << "CircleShadow realRaidus " << realRaidus << std::endl;
         
         rect_.left = cx - realRaidus;
         rect_.top = cy + realRaidus;

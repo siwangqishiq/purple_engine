@@ -191,12 +191,12 @@ void Test1App::testRenderCircle(){
     // std::cout << "strokenWidth = " << strokenWidth << std::endl;
     paint.stokenWidth = strokenWidth;
 
+    paint.shadowRadius = strokenWidth;
+    paint.color = glm::vec4(0.0f, 0.0f , 0.0f , 1.0f);
+    purple::Engine::getRenderEngine()->renderCircleShadow(cx, cy , radius - 10, paint);
+
     paint.color = ConverColorValue(Color::Red);
     purple::Engine::getRenderEngine()->renderCircle(cx, cy , radius , paint);
-
-    paint.shadowRadius = 30.0f;
-    paint.color = glm::vec4(0.0f, 0.0f , 0.0f , 1.0f);
-    purple::Engine::getRenderEngine()->renderCircleShadow(cx + 300, cy , radius , paint);
 }
 
 float angle = 0.0f;

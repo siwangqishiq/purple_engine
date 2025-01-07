@@ -17,6 +17,7 @@ float SmoothSize = 2.0f;
 float sdfCircle(vec2 p , vec2 center , float radius){
     return length(p - center) - radius;
 }
+
 float alphaFromSdf(float d, float edge) {
     return smoothstep(edge, -edge, d);
 }

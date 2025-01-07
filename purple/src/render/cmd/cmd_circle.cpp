@@ -65,14 +65,14 @@ namespace purple{
     }
 
     void CircleRenderCommand::fillRect(float cx , float cy , float radius,Paint &paint){
-        float addedRadius = 0.0f;
+        float addedRadius = 2.0f;
         if(paint.fillStyle == FillStyle::Stroken){
             addedRadius += paint.stokenWidth + 1.0f;
         }
 
         const float realRaidus = radius + addedRadius;
 
-        std::cout << "Circle realRaidus " << realRaidus << std::endl;
+        // std::cout << "Circle realRaidus " << realRaidus << std::endl;
         rect_.left = cx - realRaidus;
         rect_.top = cy + realRaidus;
         rect_.width = realRaidus + realRaidus;
