@@ -23,6 +23,7 @@
 #include "render/cmd/cmd_triangles.h"
 #include "render/cmd/cmd_round_rect.h"
 #include "render/cmd/cmd_circle.h"
+#include "render/cmd/cmd_circle_shadow.h"
 
 
 namespace purple{
@@ -601,15 +602,18 @@ namespace purple{
         cmd.runCommands();
     }
 
-    void RenderEngine::renderCircle(float cx , float cy , float radius, Paint &paint){
+    void RenderEngine::renderCircle(float cx , float cy , float radius, 
+        Paint &paint){
         CircleRenderCommand cmd(this);
         cmd.putParams(cx, cy, radius , paint);
         cmd.runCommands();
     }
 
-    void RenderEngine::renderCircleShadow(float cx , float cy, 
-        float radius, Paint &paint){
-        
+    void RenderEngine::renderCircleShadow(float cx , float cy, float radius, 
+        Paint &paint){
+        CircleShadowRenderCommand cmd(this);
+        cmd.putParams(cx, cy, radius , paint);
+        cmd.runCommands();
     }
 
     void RenderEngine::renderArc(float cx , float cy , float radius , 

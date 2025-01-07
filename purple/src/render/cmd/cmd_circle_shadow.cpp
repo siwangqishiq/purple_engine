@@ -1,7 +1,7 @@
-#include "render/cmd/cmd_circle.h"
+#include "render/cmd/cmd_circle_shadow.h"
 
 namespace purple{
-    void CircleRenderCommand::putParams(float cx , 
+    void CircleShadowRenderCommand::putParams(float cx , 
             float cy , float radius, 
             Paint &paint){
         paint_ = paint;
@@ -64,22 +64,22 @@ namespace purple{
         buildGlCommands(buf);
     }
 
-    void CircleRenderCommand::fillRect(float cx , float cy , float radius,Paint &paint){
-        float addedRadius = 0.0f;
+    void CircleShadowRenderCommand::fillRect(float cx , float cy , float radius,Paint &paint){
+        float addedRadius = paint.shadowRadius;
         if(paint.fillStyle == FillStyle::Stroken){
             addedRadius += paint.stokenWidth + 1.0f;
         }
 
         const float realRaidus = radius + addedRadius;
-
-        std::cout << "Circle realRaidus " << realRaidus << std::endl;
+        std::cout << "CircleShadow realRaidus " << realRaidus << std::endl;
+        
         rect_.left = cx - realRaidus;
         rect_.top = cy + realRaidus;
         rect_.width = realRaidus + realRaidus;
         rect_.height = rect_.width;
     }
 
-    void CircleRenderCommand::runCommands(){
+    void CircleShadowRenderCommand::runCommands(){
         if(shader_.programId <= 0){
             return;
         }
@@ -90,7 +90,7 @@ namespace purple{
         shader_.setUniformVec4("uColor" , paint_.color);
         shader_.setUniformInt("uFillType",paint_.fillStyle);
         shader_.setUniformFloat("uStrokenWidth" , paint_.stokenWidth);
-        // shader_.setUniformFloat("uShadowSize" , paint_.shadowRadius);
+        shader_.setUniformFloat("uShadowSize" , paint_.shadowRadius);
         
         glBindVertexArray(vao_);
         glBindBuffer(GL_ARRAY_BUFFER , vbo_);
