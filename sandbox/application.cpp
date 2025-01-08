@@ -64,10 +64,20 @@ void Application::init(){
 
     glfwSetKeyCallback(window , [](GLFWwindow* windows_,int key,int scancode,int action,int mods){
         // purple::Log::w("Application" , "key = %d" , key);
+        purple::InputEvent event;
+        event.code = key;
+        if(action == GLFW_PRESS){
+            event.action = purple::EVENT_ACTION_KEYBOARD_PRESS;
+        }else if(action == GLFW_RELEASE){
+            event.action = purple::EVENT_ACTION_KEYBOARD_RELEASE;
+        }else if(action == GLFW_REPEAT){
+            event.action = purple::EVENT_ACTION_KEYBOARD_REPEAT;
+        }
+        purple::InputManager::getInstance()->onEvent(event);
+
         if(glfwGetKey(windows_, GLFW_KEY_ESCAPE) == GLFW_PRESS){
             glfwSetWindowShouldClose(windows_, true);
         }
-
     });
 
     glfwSetCursorPosCallback(window , [](GLFWwindow* window, double xpos, double ypos){
