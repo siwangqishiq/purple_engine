@@ -20,6 +20,10 @@ namespace purple{
 
     extern bool UNITTEST;
 
+    struct InitParams{
+        glm::vec4 clearColor = glm::vec4(1.0f , 1.0f , 1.0f , 1.0f);
+    };
+
     class IApp{
     public:
         virtual void onInit() = 0;
@@ -36,6 +40,8 @@ namespace purple{
         static int ScreenHeight;
         
         static void init(int width , int height);
+
+        static void init(int width , int height , InitParams& params);
 
         static void dispose();
 

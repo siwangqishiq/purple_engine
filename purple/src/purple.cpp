@@ -22,6 +22,11 @@ namespace purple{
     bool UNITTEST = false;
 
     void Engine::init(int width , int height){
+        InitParams params;
+        init(width , height , params);
+    }
+
+    void Engine::init(int width , int height , InitParams& params){
         Log::w(TAG,"init engine");
         long startTime = currentTimeMillis();
         ScreenWidth = width;
@@ -34,7 +39,7 @@ namespace purple{
         }
         
         renderEngine_ = std::make_shared<RenderEngine>();
-        renderEngine_->init();
+        renderEngine_->init(params);
         renderEngine_->onScreenResize();
 
         // std::cout << " error init2 : " << glGetError() << std::endl;

@@ -33,6 +33,7 @@ namespace purple{
     class TextureInfo;
     class TextRender;
     class TextRenderOutInfo;
+    class InitParams;
 
     class RenderEngine{
     public:
@@ -46,7 +47,7 @@ namespace purple{
             Log::i("RenderEngine" , "~RenderEngine Engine deconstruct");
         }
 
-        void init();
+        void init(InitParams &params);
 
         void glContextInit();
 
@@ -234,6 +235,8 @@ namespace purple{
         std::shared_ptr<VRamManager> vramManager_;
     private:
         std::vector<std::shared_ptr<RenderCommand>> renderCommandList_;
+
+        glm::vec4 clearColor;
 
         void loadTextRenderResource();
         

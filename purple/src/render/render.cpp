@@ -65,12 +65,13 @@ namespace purple{
         // glDepthRangef(0.0f, 10.0f);
         // glDepthFunc(GL_GREATER);
         // glClearDepthf(1.0f);
-        glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
+        glClearColor(clearColor[0], clearColor[1], clearColor[2], clearColor[3]);
     }
 
-    void RenderEngine::init(){
+    void RenderEngine::init(InitParams &params){
         Log::i(TAG , "render engine init start");
-        // glContextInit();
+        
+        clearColor = params.clearColor;
 
         vramManager_ = std::make_shared<VRamManager>();
         
