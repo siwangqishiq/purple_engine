@@ -168,7 +168,7 @@ namespace purple{
         }
 
         //载入字体
-        bool loadTextFontRes(std::string fontName, std::string fontPath);
+        bool loadTextFontRes(std::string fontName, std::string fontPath , bool isAssetRes);
 
         float getAndChangeDepthValue();
         

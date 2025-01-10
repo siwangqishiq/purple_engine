@@ -854,14 +854,14 @@ namespace purple{
      * @return true 
      * @return false 
      */
-    bool RenderEngine::loadTextFontRes(std::string fontName, std::string fontPath) {
+    bool RenderEngine::loadTextFontRes(std::string fontName, std::string fontPath , bool isAssetRes) {
         std::shared_ptr<TextRender> result = textRenderMap_[fontName];
         if(result != nullptr){
             return true;
         }
 
         std::shared_ptr<TextRender> theNewTextRender = std::make_shared<TextRender>(this);
-        int ret = theNewTextRender->loadFontRes(fontName, fontPath , false);
+        int ret = theNewTextRender->loadFontRes(fontName, fontPath , isAssetRes);
         if(ret >= 0){
             textRenderMap_[fontName] = theNewTextRender;
             return true;

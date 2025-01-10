@@ -6,6 +6,8 @@
 
 void Test1App::onInit(){
     image = purple::BuildImageByAsset(std::string("img/t2.jpg"));
+
+    purple::Engine::getRenderEngine()->loadTextFontRes("heiti", "text/heiti.ttf" , true);
     
     // mCircleSdfShader = purple::ShaderManager::getInstance()
     //     ->loadAssetShader("sdf_circle" , "shader/shader_vert.glsl","shader/circle_sdf_frag.glsl");
@@ -39,7 +41,8 @@ void Test1App::onTick(){
 //    test_boolops();
     
     // testRenderRect();
-    testRenderCircle();
+    // testRenderCircle();
+    testTextRender();
     mTime += 0.02f;
 }
 
@@ -225,5 +228,12 @@ void Test1App::testRenderRect(){
     purple::Engine::getRenderEngine()->renderRoundRect(rect, 
         0.0f, 0.0f , 0.0f , 0.0f, 
         matrix , paint);
+}
+
+void Test1App::testTextRender(){
+    using namespace purple;
+    TextPaint textPaint;
+    textPaint.textColor = ConverColorValue(Color::Purple);
+    Engine::getRenderEngine()->renderText(L"你好世界" , 100, 200, textPaint);
 }
 

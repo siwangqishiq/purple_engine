@@ -31,4 +31,5 @@ private:
 
     void testRenderCircle();
     void testRenderRect();
+    void testTextRender();
 };
