@@ -7,6 +7,7 @@
 - ~~Shader二进制产物cache~~ 
 - ~~Android平台的支持~~
 - 新的View体系(working)
+- 粒子系统API
 
 
 ### UI库 Ver1.0
@@ -37,3 +38,8 @@
 
 - 布局
   - ConstraintContainer 约束布局
+
+
+
+### 粒子系统 Particle System
+  

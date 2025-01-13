@@ -25,6 +25,9 @@ namespace purple{
     bool PointInCircle(float x , float y , float cx , float cy , float radius);
 
     float Clamp(float x ,float min , float max);
+
+    int RndInt(int max, int min);
+    float RndFloat(float max , float min);
 }
 
 
