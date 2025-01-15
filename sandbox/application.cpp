@@ -35,7 +35,12 @@ void Application::init(){
     purple::Log::i(TAG , "Application init");
     glfwInit();
 
-    #ifdef __ARM_ARCH //for 树梅派
+    #if defined(__APPLE__) && defined(__arm64__) //apple m系芯片
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 1);
+    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+    glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
+    #elifdef __ARM_ARCH //for 树梅派
     glfwWindowHint(GLFW_CLIENT_API, GLFW_OPENGL_ES_API);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);

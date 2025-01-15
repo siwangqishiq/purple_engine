@@ -368,6 +368,8 @@ namespace purple{
         std::string shadrHeadSrc =   
         #ifdef __ANDROID__
         "#version 300 es\n";
+        #elif defined(__APPLE__) && defined(__arm64__)
+        "#version 330 core\n";
         #elif __ARM_ARCH
         "#version 300 es\n";
         #else
