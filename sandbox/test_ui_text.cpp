@@ -132,21 +132,21 @@ void TestTextUi::testColumContainerInStack(){
         .setLayoutGravity<ColumContainer>(LayoutGravity::Center);
     container->addChild(columContainer);
 
-    auto text1 = std::make_shared<Text>(L"大政奉还" , LAYOUT_WRAP_CONTENT , LAYOUT_WRAP_CONTENT);
+    auto text1 = std::make_shared<Text>(L"大政大政大政大政大政大政大政" , LAYOUT_WRAP_CONTENT , LAYOUT_WRAP_CONTENT);
     text1->setFontColor<Text>(ConverColorValue(Color::Black))
         .setFontSize<Text>(50.0f)
         .setMargin<Text>(0,0,0,0)
         .setBackgroundColor<Text>(ConverColorValue(Color::Pink))
-        .setPadding<Text>(20,10,20,10);
+        .setPadding<Text>(10,10,10,10);
     columContainer->addChild(text1);
 
-    auto text2 = std::make_shared<Text>(L"大政奉还" , LAYOUT_WRAP_CONTENT , LAYOUT_WRAP_CONTENT);
+    auto text2 = std::make_shared<Text>(L"奉还" , LAYOUT_WRAP_CONTENT , LAYOUT_WRAP_CONTENT);
     text2->setFontColor<Text>(ConverColorValue(Color::Black))
         .setFontSize<Text>(50.0f)
         .setFontWeight<Text>(75.0f)
         .setMargin<Text>(0,20,0,0)
         .setBackgroundColor<Text>(ConverColorValue(Color::Silver))
-        .setPadding<Text>(20,10,20,10);
+        .setPadding<Text>(10,10,10,10);
     columContainer->addChild(text2);
 
     ui->setRootContainer(container);
