@@ -11,6 +11,10 @@
 #define STB_IMAGE_WRITE_IMPLEMENTATION
 #include "stb_image_write.h"
 
+#ifdef __APPLE__
+#include <TargetConditionals.h>
+#endif
+
 namespace purple{
     std::shared_ptr<RenderEngine> purple::Engine::renderEngine_ = nullptr;
     std::shared_ptr<Timer> purple::Engine::timer_ = nullptr;
@@ -20,6 +24,61 @@ namespace purple{
     const char* purple::Engine::TAG = "purple";
 
     bool UNITTEST = false;
+
+    Platform platform = Unknow;
+
+    Platform DetectPlatform() {
+        if(platform != Unknow){
+            return platform;
+        }
+
+        #ifdef __APPLE__
+        #if TARGET_OS_IPHONE
+            platform = iOS;
+        #elif TARGET_OS_MAC
+            platform = Mac_x86;
+            #if defined(__arm64__) || defined(__aarch64__)
+                platform = Mac_arm64;
+            #elif defined(__x86_64__) || defined(__i386__)
+                platform = Mac_x86;
+            #else
+                platform = Unknow;
+            #endif
+        #else
+            platform = Unknow;
+        #endif
+        #elif defined(_WIN32)
+            platform = Windows;
+        #elif defined(__ANDROID__)
+            platform = Android;
+        #elif defined(__linux__)
+        // 默认认为是 Linux 环境
+        bool is_raspberry_pi = false;
+
+        // 检测是否为 Raspberry Pi
+        std::ifstream cpuinfo("/proc/cpuinfo");
+        if (cpuinfo.is_open()) {
+            std::string line;
+            while (std::getline(cpuinfo, line)) {
+                if (line.find("Raspberry Pi") != std::string::npos) {
+                    is_raspberry_pi = true;
+                    break;
+                }
+            }
+            cpuinfo.close();
+        }
+
+        if (is_raspberry_pi) {
+            platform = Raspi;
+        } else {
+            platform = Linux;
+        }
+        #else
+            platform = Unknow;
+        #endif
+        return platform;
+    }
+
 
     void Engine::init(int width , int height){
         InitParams params;

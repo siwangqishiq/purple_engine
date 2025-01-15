@@ -18,6 +18,21 @@ namespace purple{
     
     const bool isDebug = true;
 
+    enum Platform{
+        Unknow = -1,
+        Android,
+        iOS,
+        Windows,
+        Mac_x86,
+        Mac_arm64,
+        Linux,
+        Raspi
+    };
+
+    extern Platform platform;
+    
+    Platform DetectPlatform();
+
     extern bool UNITTEST;
 
     struct InitParams{
