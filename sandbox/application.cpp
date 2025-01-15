@@ -46,7 +46,6 @@ void Application::init(){
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
     glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
     #endif
-    
 
     glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 
@@ -57,6 +56,12 @@ void Application::init(){
     GLFWmonitor *mointor = isFullScreen?glfwGetPrimaryMonitor():nullptr;
 
     window = glfwCreateWindow(screenWidth, screenHeight, "run", mointor, nullptr);
+    if(window == nullptr){
+        char *buf;
+        glfwGetError((const char **)&buf);
+        std::cerr << "create window error " << buf << std::endl;
+        return;
+    }
     
     glfwSetCharCallback(window , [](GLFWwindow* window_, unsigned int codepoint){
         // std::cout << "ime:" << codepoint << std::endl;
