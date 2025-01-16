@@ -1,11 +1,8 @@
 #include "utils.h"
 #include <cmath>
-#include <random>
+#include "widget/random_util.h"
 
 namespace purple{
-    std::random_device rd;
-    std::mt19937 gen(rd());
-
     std::string date_time(std::time_t posix){
         char buf[20]; // big enough for 2015-07-08 10:06:51\0
         std::tm tp = *std::localtime(&posix);
@@ -84,12 +81,10 @@ namespace purple{
     }
     
     int RndInt(int min, int max){
-        std::uniform_int_distribution<int> dis(min, max);
-        return dis(gen);
+        return RandomUtil::randomInt(min, max);
     }
 
     float RndFloat(float min , float max){
-        std::uniform_real_distribution<float> dis(min, max);
-        return dis(gen);
+        return RandomUtil::randomFloat(min, max);
     }
 }

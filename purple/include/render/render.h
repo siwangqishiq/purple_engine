@@ -33,7 +33,7 @@ namespace purple{
     class TextureInfo;
     class TextRender;
     class TextRenderOutInfo;
-    class InitParams;
+    struct InitParams;
 
     class RenderEngine{
     public:
