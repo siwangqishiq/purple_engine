@@ -6,7 +6,7 @@
 #include "render/common.h"
 
 namespace purple{
-    class TextureInfo;
+    struct TextureInfo;
     class TextureImageRegion;
 
     class TextureImage{
@@ -77,8 +77,8 @@ namespace purple{
     class TextureImageAnimation{
     private:
         std::vector<std::shared_ptr<TextureImageRegion>> imageRegionList_;
-        int currentFrame_ = 0;
-        long duration_ = 200;
+        // int currentFrame_ = 0;
+        // long duration_ = 200;
     public:
         TextureImageAnimation(){};
 

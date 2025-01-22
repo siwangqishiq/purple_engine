@@ -58,7 +58,7 @@ namespace purple{
     public:
         JsonValueType valueType = None;
 
-        ~JsonValue(){
+        virtual ~JsonValue(){
         }
 
         JsonValue(int val) : intValue_(val){
@@ -119,7 +119,7 @@ namespace purple{
     public:
         JsonObject();
 
-        ~JsonObject(){
+        virtual ~JsonObject(){
             // std::cout << "destory json object" << std::endl;
         }
 
@@ -184,7 +184,7 @@ namespace purple{
         JsonArray(){
         }
 
-        ~JsonArray(){
+        virtual ~JsonArray(){
         }
 
         static std::shared_ptr<JsonArray> create(){

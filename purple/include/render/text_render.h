@@ -10,7 +10,7 @@
 
 namespace purple{
     class RenderEngine;
-    class TextureInfo;
+    struct TextureInfo;
     class SdfTextRenderCommand;
 
     struct TextRenderOutInfo{

@@ -2,7 +2,7 @@
 #include "ui.h"
 
 namespace purple{
-    class TextureInfo;
+    struct TextureInfo;
     class UiRoot{
     public:
         UiRoot(int w, int h);
