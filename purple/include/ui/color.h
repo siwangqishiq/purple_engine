@@ -16,6 +16,8 @@ namespace purple{
         Silver,
         Gray,
         Pink,
+        Orange,
+        Cyan
     };
 
     glm::vec4 ConverColorValue(Color color);

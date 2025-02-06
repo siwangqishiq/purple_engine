@@ -48,6 +48,12 @@ namespace purple{
             case Pink:
                 result = HexColorToVecValue(255,192,203,255);
                 break;
+            case Orange:
+                result = HexColorToVecValue(255,102,0,255);
+                break;
+            case Cyan:
+                result = HexColorToVecValue(0,255,255,255);
+                break;
         }//end switch
         return result;
     }
