@@ -13,7 +13,7 @@ namespace purple{
             setWidth(widthValue);
         }else if(widthSpecMode == MeasureSpecMode::Atmost){
             Rect outRect;
-            preCalculateTextRectSize(outRect, heightValue);
+            preCalculateTextRectSize(outRect, widthValue);
             setWidth(std::min(
                     static_cast<int>(outRect.width) + this->paddingLeft_ + this->paddingRight_
                     , widthValue));
@@ -57,12 +57,16 @@ namespace purple{
 
         render->renderTextWithRect(this->content_,textRect,this->textPaint_ , nullptr);
         
-        // Log::i("ui","Text render size %d , %d pos: %d, %d" , width_ , height_ , left , top);
+        // Log::i("ui","Text %s render size %d , %d pos: %d, %d" , this->id.c_str(),
+        //      width_ , height_ , left , top);
     }
 
     void Text::preCalculateTextRectSize(Rect &rect,int maxWidth){
+        
         auto render = purple::Engine::getRenderEngine();
+        // Log::i("ui", "text %s, maxWidth %d", this->id.c_str(), maxWidth);
         render->preCalculateTextSize(this->content_,this->textPaint_,maxWidth,rect);
+        // Log::i("ui", "text %s, measure %f , %f", this->id.c_str(), rect.width , rect.height);
     }
 
     Text::~Text(){

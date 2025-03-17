@@ -1,6 +1,7 @@
 #include "test_ui_text.h"
 #include "ui/img.h"
 #include "purple_ui.h"
+#include "input/input_manager.h"
 #include "log.h"
 
 void TestTextUi::onInit(){
@@ -8,6 +9,14 @@ void TestTextUi::onInit(){
         purple::Engine::ScreenWidth , 
         purple::Engine::ScreenHeight
     );
+
+    purple::InputManager::getInstance()->addEventListener("ui",[this](purple::InputEvent &e){
+        if(this->ui != nullptr){
+            // std::cout << "rootui = " << this->ui << std::endl;
+            return this->ui->dispatchInputEvent(e);
+        }
+        return false;
+    });
 
     // testText();
     // testStackContainerWithText();
@@ -126,21 +135,26 @@ void TestTextUi::testColumContainerInStack(){
     auto container = std::make_shared<StackContainer>(LAYOUT_MATCH_PARENT, LAYOUT_MATCH_PARENT);
     container->setBackgroundColor<StackContainer>(ConverColorValue(Color::White));
 
-    auto columContainer = std::make_shared<ColumContainer>(LAYOUT_WRAP_CONTENT, LAYOUT_WRAP_CONTENT);
+    auto columContainer = std::make_shared<ColumContainer>(LAYOUT_MATCH_PARENT, LAYOUT_WRAP_CONTENT);
     columContainer->setBackgroundColor<ColumContainer>(ConverColorValue(Color::SkyBlue))
         .setPadding<ColumContainer>(10,10,10,10)
-        .setLayoutGravity<ColumContainer>(LayoutGravity::Center);
+        .setMargin<ColumContainer>(20,20,20,20)
+        .setLayoutGravity<ColumContainer>(LayoutGravity::TopLeft);
     container->addChild(columContainer);
 
-    auto text1 = std::make_shared<Text>(L"大政大政大政大政大政大政大政" , LAYOUT_WRAP_CONTENT , LAYOUT_WRAP_CONTENT);
+    auto text1 = std::make_shared<Text>(L"你好世界1你好世界2你好世界3你好世界4你好世界5你好世界6你好世界7你好世界8" , LAYOUT_WRAP_CONTENT , LAYOUT_WRAP_CONTENT);
     text1->setFontColor<Text>(ConverColorValue(Color::Black))
         .setFontSize<Text>(50.0f)
         .setMargin<Text>(0,0,0,0)
         .setBackgroundColor<Text>(ConverColorValue(Color::Pink))
-        .setPadding<Text>(10,10,10,10);
+        .setId<Text>("error_col")
+        .setPadding<Text>(10,10,10,10)
+        .setClick<Text>([](purple::InputEvent &e){
+            purple::Log::i("click","click HelloWorld!");
+        });
     columContainer->addChild(text1);
 
-    auto text2 = std::make_shared<Text>(L"奉还" , LAYOUT_WRAP_CONTENT , LAYOUT_WRAP_CONTENT);
+    auto text2 = std::make_shared<Text>(L"奉还1奉还2奉还3奉还4" , LAYOUT_WRAP_CONTENT , LAYOUT_WRAP_CONTENT);
     text2->setFontColor<Text>(ConverColorValue(Color::Black))
         .setFontSize<Text>(50.0f)
         .setFontWeight<Text>(75.0f)
