@@ -17,7 +17,7 @@ namespace purple{
     long long currentTimeMicro();
 
     void ScaleWithPoint(Point &point , float scale, Point center);
-
+    
     void Rotate(Point &point, float cx , float cy , float angle);
 
     float RoundToTwoDecimal(float num);
@@ -27,6 +27,7 @@ namespace purple{
     float Clamp(float x ,float min , float max);
 
     int RndInt(int max, int min);
+
     float RndFloat(float max , float min);
 }
 
