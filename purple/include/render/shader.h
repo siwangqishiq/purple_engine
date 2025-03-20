@@ -29,6 +29,9 @@ namespace purple{
 
     GLuint CreateGPUProgramByAsset(std::string vsFilePath , std::string fsFilePath);
 
+    //创建一个计算shader
+    GLuint CreateComputeProgremAsset(std::string shaderProgramPath);
+
     //读取文本文件
     std::string ReadFileAsText(std::string path);
 

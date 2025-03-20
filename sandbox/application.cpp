@@ -7,6 +7,7 @@
 #include "test_ui.h"
 #include "test_ui_img.h"
 #include "test_ui_text.h"
+#include "test_particle.h"
 
 #ifndef __ANDROID__
 #define GLFW_INCLUDE_NONE
@@ -28,7 +29,8 @@ void Application::onCreate(){
     // appInstanceList.push_back(std::make_shared<TestTextRender>());
     // appInstanceList.push_back(std::make_shared<TestUi>());
     // appInstanceList.push_back(std::make_shared<TestImgUi>());
-    appInstanceList.push_back(std::make_shared<TestTextUi>());
+    // appInstanceList.push_back(std::make_shared<TestTextUi>());
+    appInstanceList.push_back(std::make_shared<TestParticle>());
 }
 
 void Application::init(){
@@ -41,18 +43,17 @@ void Application::init(){
         platform == purple::Platform::Mac_arm64 ||
         platform == purple::Platform::Linux){
         glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
-        glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 1);
+        glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
         glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
         glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
     }else{
         glfwWindowHint(GLFW_CLIENT_API, GLFW_OPENGL_ES_API);
         glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-        glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
+        glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
         glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_ANY_PROFILE);
     }
 
-    glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
-
+    // glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
     // glfwWindowHint(GLFW_DECORATED , GLFW_FALSE); 
     // glfwWindowHint(GLFW_TRANSPARENT_FRAMEBUFFER , GLFW_TRUE);
     glfwWindowHint(GLFW_COCOA_RETINA_FRAMEBUFFER , GL_FALSE);

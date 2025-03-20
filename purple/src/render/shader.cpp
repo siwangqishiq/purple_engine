@@ -63,6 +63,52 @@ namespace purple{
         return program;
     }
 
+    // 创建一个用于GPU运算的compute shader
+    GLuint CreateComputeShaderProgram(const char* src){
+        GLuint shader = glCreateShader(GL_COMPUTE_SHADER);
+        if(shader == 0){
+            Log::e(TAG_SHADER, "glCreateComputeShader error");
+            glDeleteShader(shader);
+            return 0;
+        }
+        
+        glShaderSource(shader, 1 , &src , nullptr);
+        glCompileShader(shader);
+        GLint success;
+        glGetShaderiv(shader, GL_COMPILE_STATUS, &success);
+        if (!success) {
+            char infoLog[512];
+            glGetShaderInfoLog(shader, 512, nullptr, infoLog);
+            Log::e(TAG_SHADER,"Compute Shader Compilation Failed:%s\n" , infoLog);
+            return 0;
+        }
+
+        GLuint program = glCreateProgram();
+        // std::cout << "Compute program: " << program << std::endl;
+        glAttachShader(program , shader);
+        GLint attachedCount;
+        glGetProgramiv(program, GL_ATTACHED_SHADERS, &attachedCount);
+        // std::cout << "Attached shaders: " << attachedCount << std::endl;
+
+        glLinkProgram(program);
+        GLint linkResult = GL_TRUE;
+        glGetProgramiv(program, GL_LINK_STATUS, &linkResult);
+        if(linkResult == GL_FALSE){
+            char szLog[512] = { 0 };
+            GLsizei logLen = 0;
+            glGetProgramInfoLog(program, 512, &logLen, szLog);
+            Log::e(TAG_SHADER, 
+                    "Compile compute program fail error log:\n %s \nsource code:\n%s\n logLen = %d" 
+                    ,szLog , src , logLen);
+            glDeleteShader(shader);
+            glDeleteProgram(program);
+            program = 0;
+        }
+
+        glDeleteShader(shader);
+        return program;
+    }
+
     bool IsFileExists(std::string& name){
         std::ifstream f(name.c_str());
         return f.good();
@@ -364,20 +410,28 @@ namespace purple{
                                 ReadAssetTextFile(fsFilePath).c_str());
     }
 
+    //创建compute shader
+    GLuint CreateComputeProgremAsset(std::string shaderProgramPath){
+        // std::string proSrc = AssetManager::getInstance()->readAssetTextFileAsString(shaderProgramPath);
+        // std::cout << "proSrc:" << proSrc.c_str() << std::endl;
+        auto proSrc = ShaderManager::getInstance()->readShaderSrc(shaderProgramPath);
+        return CreateComputeShaderProgram(proSrc.c_str());
+    }
+
     std::string ShaderManager::readShaderSrc(std::string shaderPath){
         std::string shadrHeadSrc =   
         #ifdef __ANDROID__
-        "#version 300 es\n";
+        "#version 330 es \n";
         #elif defined(__APPLE__) && defined(__arm64__)
-        "#version 330 core\n";
+        "#version 430 core \n";
         #elif __ARM_ARCH
-        "#version 300 es\n";
+        "#version 330 es \n";
         #else
-        "#version 330 core\n";
+        "#version 430 core \n";
         #endif
         
-        auto shaderBodySrc = AssetManager::getInstance()->readAssetTextFileAsString(shaderPath);
-        return shadrHeadSrc + shaderBodySrc;
+        std::string shaderBodySrc = AssetManager::getInstance()->readAssetTextFileAsString(shaderPath);
+        return std::string(shadrHeadSrc + shaderBodySrc);
     }
 
     Shader ShaderManager::loadAssetShader(std::string shaderName , 
