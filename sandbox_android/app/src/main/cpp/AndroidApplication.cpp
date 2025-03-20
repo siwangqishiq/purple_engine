@@ -8,6 +8,7 @@
 #include "test_ui.h"
 #include "test_ui_img.h"
 #include "test_ui_text.h"
+#include "test_particle.h"
 #include "input/input_manager.h"
 #include <thread>
 #include <string>
@@ -16,12 +17,13 @@
 void AndroidApplication::init(){
     purple::Engine::init(width , height);
 
-    // appInstanceList.push_back(std::make_shared<Test1App>());
-    // appInstanceList.push_back(std::make_shared<TestTextRender>());
+//     appInstanceList.push_back(std::make_shared<Test1App>());
+//     appInstanceList.push_back(std::make_shared<TestTextRender>());
 //     appInstanceList.push_back(std::make_shared<TestUi>());
-     appInstanceList.push_back(std::make_shared<TestImgUi>());
-//    appInstanceList.push_back(std::make_shared<TestTextUi>());
-    
+//     appInstanceList.push_back(std::make_shared<TestImgUi>());
+//     appInstanceList.push_back(std::make_shared<TestTextUi>());
+    appInstanceList.push_back(std::make_shared<TestParticle>());
+
     for(std::shared_ptr<purple::IApp> &app : appInstanceList){
         app->onInit();
     }

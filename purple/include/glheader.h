@@ -9,6 +9,9 @@
 #elif __ANDROID__
 #include <GLES3/gl3.h>
 #include <GLES2/gl2ext.h>
+#include <GLES3/gl31.h>
+#include <GLES3/gl32.h>
+#include <GLES3/gl3ext.h>
 #elif __ARM_ARCH //for 树梅派
 #include "glad/glades.h"
 #elif __linux__
