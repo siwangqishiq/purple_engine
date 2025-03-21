@@ -11,7 +11,7 @@
 
 namespace purple{
     std::string ReadAssetTextFile(std::string filename) {
-        return std::string();
+        return ShaderManager::getInstance()->readShaderSrc(filename);
     }   
 
     GLuint CreateGPUProgram(const char* vsShaderSource, const char* fsShaderSource) {
@@ -153,6 +153,13 @@ namespace purple{
         return shader;
     }
 
+    Shader Shader::buildGPUComptuteShaderAssetFile(std::string srcFilePath){
+        Shader shader;
+        auto pid = CreateComputeProgremAsset(srcFilePath);
+        shader.programId = pid;
+        return shader;
+    }
+
     Shader Shader::buildGPUProgramFromBinaryFile(std::string shaderName){
         Shader shader;
         if(isDebug){
@@ -239,6 +246,10 @@ namespace purple{
 
     void Shader::useShader(){
         glUseProgram(this->programId);
+    }
+
+    void Shader::dispathComputeShader(int groupX, int groupY, int groupZ){
+        glDispatchCompute(groupX, groupY, groupZ);
     }
 
     void Shader::setUniformInt(std::string key , int value){

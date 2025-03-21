@@ -188,9 +188,9 @@ void Application::init(){
         #endif
     #endif
 
-    // purple::InitParams params;
-    // params.clearColor = glm::vec4(1.0f , 1.0f ,1.0f , 1.0f);
-    purple::Engine::init(screenWidth , screenHeight);
+    purple::InitParams params;
+    params.clearColor = glm::vec4(0.0f , 0.0f ,0.0f , 1.0f);
+    purple::Engine::init(screenWidth , screenHeight , params);
     showExtensionInfo();
 
     onCreate();

@@ -2,6 +2,7 @@
 
 #include <memory>
 #include "purple.h"
+#include "particle/particle.h"
 
 class TestParticle : public purple::IApp{
 public:
@@ -11,6 +12,10 @@ public:
 
 private:
     float mTime = 0.0f;
+
+    std::shared_ptr<purple::ParticleGroup> particles;
     
     void testSsbo();
+
+    void testParticleUpdate();
 };

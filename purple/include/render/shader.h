@@ -45,8 +45,13 @@ namespace purple{
 
         static Shader buildGPUProgramFromBinaryFile(std::string shaderName);
 
+        static Shader buildGPUComptuteShaderAssetFile(std::string srcFilePath);
+
         //使用shader
         void useShader();
+        
+        //调度计算着色器
+        void dispathComputeShader(int groupX , int groupY, int groupZ);
 
         //
         void setUniformInt(std::string key , int value);

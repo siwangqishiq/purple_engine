@@ -24,7 +24,7 @@ void main(){
     }
 
     Particle p = particles[id];
-
+    
     if (p.velocity.w > 0.0f) {
         p.position.xyz += p.velocity.xyz * deltaTime;
         p.velocity.w -= deltaTime;

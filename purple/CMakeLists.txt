@@ -11,7 +11,9 @@ aux_source_directory(src/resource   SRC_RESOURCE)
 aux_source_directory(src/widget     SRC_WIDGET)
 aux_source_directory(src/render     SRC_RENDER)
 aux_source_directory(src/render/cmd     SRC_RENDER_CMD)
+aux_source_directory(src/particle     SRC_PARTICLE)
 aux_source_directory(src/ui     SRC_RENDER_UI)
+
 
 set(src_list "")
 list(APPEND src_list ${SRCS})
@@ -22,6 +24,7 @@ list(APPEND src_list ${SRC_WIDGET})
 list(APPEND src_list ${SRC_RENDER})
 list(APPEND src_list ${SRC_RENDER_CMD})
 list(APPEND src_list ${SRC_RENDER_UI})
+list(APPEND src_list ${SRC_PARTICLE})
 
 set(src_list_count "")
 list(LENGTH src_list src_list_count)
