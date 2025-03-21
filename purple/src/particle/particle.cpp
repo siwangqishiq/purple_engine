@@ -17,7 +17,10 @@ namespace purple{
 
         glGenVertexArrays(1, &vao);
         glBindVertexArray(vao);
+
+#ifndef __ANDROID__
         glEnable(GL_PROGRAM_POINT_SIZE);
+#endif
 
         glGenBuffers(1, &ssbo);
         if(ssbo == 0){
@@ -46,7 +49,7 @@ namespace purple{
         std::vector<Particle> particles(particleCount);
         for(int i = 0 ; i < particleCount ; i++){
             particles[i].pos = glm::vec2(RndFloat(-1.0f , 1.0f), RndFloat(-1.0f , 1.0f));
-            particles[i].velocity = glm::vec2(RndFloat(-1.0f , 1.0f), RndFloat(-1.0f , 1.0f));
+            particles[i].velocity = 0.001f * glm::vec2(RndFloat(-1.0f , 1.0f), RndFloat(-1.0f , 1.0f));
         }//end for i
         return particles;
     }
@@ -55,7 +58,7 @@ namespace purple{
         computeShader.useShader();
         // glBindBuffer(GL_SHADER_STORAGE_BUFFER, ssbo);
         glBindBufferBase(GL_SHADER_STORAGE_BUFFER, 0, ssbo);
-        computeShader.dispathComputeShader(particleCount / 32,1,1);
+        computeShader.dispathComputeShader(particleCount /32,1,1);
         glMemoryBarrier(GL_SHADER_STORAGE_BARRIER_BIT);
 
         renderShader.useShader();

@@ -15,7 +15,15 @@ layout(std430, binding = 0) buffer SSBO {
 void main(){
     uint idx = gl_GlobalInvocationID.x;
     Particle p = particleData[idx];
-    p.position = p.position + 0.001f * p.velocity;
+    vec2 vel = p.velocity;
+    if(p.position.x <= -1.0f || p.position.x >= 1.0f){
+        vel.x = -1.0f * vel.x; 
+    }
+    if(p.position.y <= -1.0f || p.position.y >= 1.0f){
+        vel.y = -1.0f * vel.y;
+    }
+    p.velocity = vel;
+    p.position = p.position + p.velocity;
     particleData[idx] = p;
 }   
 
