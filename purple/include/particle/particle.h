@@ -1,14 +1,19 @@
 #pragma once
 
 #include <string>
-#include "glm/vec2.hpp"
+#include "glm/vec3.hpp"
+#include "glm/vec4.hpp"
 #include <vector>
 #include "render/shader.h"
 
 namespace purple{
+
     struct Particle{
-        glm::vec2 pos;
-        glm::vec2 velocity;
+        glm::vec3 pos;
+        float _padding0;
+        glm::vec3 velocity;
+        float _padding1;
+        glm::vec4 color;
     };
 
     class ParticleGroup{

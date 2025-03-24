@@ -1,6 +1,7 @@
 precision highp float;
 
 out vec4 outColor;
+
 in vec4 particleColor;
 
 void main() {
@@ -12,7 +13,9 @@ void main() {
     float radius = 0.5;
 
     float alpha = 1.0 - step(radius, distance);
-    if (alpha <= 0.0) discard;
-    outColor = vec4(particleColor.rgb, alpha);
+    if (alpha <= 0.0) 
+        discard;
+    
+    outColor = vec4(particleColor.rgb, 1.0f);
 }
 

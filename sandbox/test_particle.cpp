@@ -17,8 +17,8 @@ void TestParticle::onInit(){
     purple::Log::i("test","GL_MAX_COMPUTE_WORK_GROUP_SIZE(%d, %d, %d)", size_x , size_y, size_z);
     glGetIntegerv(GL_MAX_COMPUTE_WORK_GROUP_INVOCATIONS, &maxWorkGroupInvocations);
     purple::Log::i("test","GL_MAX_COMPUTE_WORK_GROUP_INVOCATIONS = %d" , maxWorkGroupInvocations);
-
-    particles = std::make_shared<purple::ParticleGroup>("test",1024 * 16);
+    
+    particles = std::make_shared<purple::ParticleGroup>("test", 1024 * 64);
 }
 
 void TestParticle::onTick(){
@@ -27,7 +27,6 @@ void TestParticle::onTick(){
 }
 
 void TestParticle::onDispose(){
-    
 }
 
 void TestParticle::testSsbo(){

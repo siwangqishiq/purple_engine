@@ -13,6 +13,9 @@ namespace purple{
     }
 
     void ParticleGroup::init(){
+        // glEnable(GL_BLEND);
+        // glBlendFunc(GL_SRC_ALPHA , GL_ONE_MINUS_SRC_ALPHA);
+
         std::vector<Particle> particleData = prepareData();
 
         glGenVertexArrays(1, &vao);
@@ -47,23 +50,34 @@ namespace purple{
 
     std::vector<Particle> ParticleGroup::prepareData(){
         std::vector<Particle> particles(particleCount);
+        // float depth = purple::Engine::getRenderEngine()->getAndChangeDepthValue();
+        // std::cout << "depth = " << depth << std::endl;
         for(int i = 0 ; i < particleCount ; i++){
-            particles[i].pos = glm::vec2(RndFloat(-1.0f , 1.0f), RndFloat(-1.0f , 1.0f));
-            particles[i].velocity = 0.001f * glm::vec2(RndFloat(-1.0f , 1.0f), RndFloat(-1.0f , 1.0f));
+            particles[i].pos = glm::vec3(RndFloat(-1.0f , 1.0f), RndFloat(-1.0f , 1.0f), purple::Engine::getRenderEngine()->getAndChangeDepthValue());
+            // particles[i].velocity = glm::vec3(0.0f, 0.0f ,0.0f);
+            particles[i].color = glm::vec4(RndFloat(0.0f , 1.0f),
+                RndFloat(0.0f , 1.0f),RndFloat(0.0f , 1.0f),RndFloat(0.0f , 1.0f));
+            // std::cout << "particle pos: " << particles[i].pos[0] << " " << particles[i].pos[1]
+            //     << " " << particles[i].pos[2] << std::endl;
+            // std::cout << "particle color: " << particles[i].color[0] 
+            //     << " " << particles[i].color[1]
+            //     << " " << particles[i].color[2]
+            //     << " " << particles[i].color[3] << std::endl;
+             particles[i].velocity = 0.01f * glm::vec3(RndFloat(-1.0f , 1.0f), RndFloat(-1.0f , 1.0f) , 0.0f);
         }//end for i
         return particles;
     }
 
     void ParticleGroup::updateAndRender(){
         computeShader.useShader();
-        // glBindBuffer(GL_SHADER_STORAGE_BUFFER, ssbo);
+        glBindBuffer(GL_SHADER_STORAGE_BUFFER, ssbo);
         glBindBufferBase(GL_SHADER_STORAGE_BUFFER, 0, ssbo);
-        computeShader.dispathComputeShader(particleCount /32,1,1);
+        computeShader.dispathComputeShader(particleCount,1,1);
         glMemoryBarrier(GL_SHADER_STORAGE_BARRIER_BIT);
 
         renderShader.useShader();
         glBindVertexArray(vao);
-        // glBindBuffer(GL_SHADER_STORAGE_BUFFER, ssbo);
+        glBindBuffer(GL_SHADER_STORAGE_BUFFER, ssbo);
         glBindBufferBase(GL_SHADER_STORAGE_BUFFER, 0, ssbo);
         glDrawArrays(GL_POINTS, 0, this->particleCount);
         glBindVertexArray(0);
@@ -71,5 +85,7 @@ namespace purple{
 
     ParticleGroup::~ParticleGroup(){
         Log::i("particle_group" , "~ParticleGroup");
+        computeShader.deleteSelf();
+        renderShader.deleteSelf();
     }
 }

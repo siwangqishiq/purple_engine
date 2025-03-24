@@ -319,6 +319,12 @@ namespace purple{
         return loc;
     }
 
+    void Shader::deleteSelf(){
+        if(programId != 0){
+            glDeleteShader(programId);
+        }
+    }
+
     //获取 或 创建出一个shader
     Shader ShaderManager::loadShader(std::string shaderName , 
             std::string vtxSrc , std::string frgSrc) {

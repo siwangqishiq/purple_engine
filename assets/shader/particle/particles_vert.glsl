@@ -1,7 +1,10 @@
 
 struct Particle{
-    vec2 position;
-    vec2 velocity;
+    vec3 position;
+    float _padding0;
+    vec3 velocity;
+    float _padding1;
+    vec4 color;
 };
 
 layout(std430, binding = 0) buffer SSBO {
@@ -11,8 +14,9 @@ layout(std430, binding = 0) buffer SSBO {
 out vec4 particleColor;
 
 void main(){
-    gl_Position = vec4(particles[gl_VertexID].position, 0.0, 1.0);
-    gl_PointSize = 14.0f;
-    particleColor = vec4(1000.0f * (particles[gl_VertexID].velocity), 1.0f , 1.0f);
+    Particle p = particles[gl_VertexID];
+    gl_Position = vec4(p.position, 1.0f);
+    gl_PointSize = 32.0f;
+    particleColor = p.color;
 }
 

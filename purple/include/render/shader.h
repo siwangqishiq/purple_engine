@@ -83,6 +83,8 @@ namespace purple{
 
         int findUniformLocation(std::string key);
 
+        void deleteSelf();
+
         unsigned int programId = 0;
     protected:
         std::unordered_map<std::string , int> unifromLocs; //unifrom变量loccation
