@@ -1,4 +1,4 @@
-#include "particle/particle.h"
+#include "particle/group.h"
 #include "purple.h"
 #include "render/shader.h"
 #include "utils.h"
@@ -50,41 +50,71 @@ namespace purple{
 
     std::vector<Particle> ParticleGroup::prepareData(){
         std::vector<Particle> particles(particleCount);
-        // float depth = purple::Engine::getRenderEngine()->getAndChangeDepthValue();
-        // std::cout << "depth = " << depth << std::endl;
+
+        float viewWidth = purple::Engine::ScreenWidth;
+        float viewHeight = purple::Engine::ScreenHeight;
+        glm::vec2 p(0.0f, 0.0f);
+        float k = viewHeight / viewWidth;
+        float step = viewWidth / particleCount;
+
         for(int i = 0 ; i < particleCount ; i++){
-            particles[i].pos = glm::vec3(RndFloat(-1.0f , 1.0f), RndFloat(-1.0f , 1.0f), purple::Engine::getRenderEngine()->getAndChangeDepthValue());
-            // particles[i].velocity = glm::vec3(0.0f, 0.0f ,0.0f);
-            particles[i].color = glm::vec4(RndFloat(0.0f , 1.0f),
-                RndFloat(0.0f , 1.0f),RndFloat(0.0f , 1.0f),RndFloat(0.0f , 1.0f));
-            // std::cout << "particle pos: " << particles[i].pos[0] << " " << particles[i].pos[1]
-            //     << " " << particles[i].pos[2] << std::endl;
-            // std::cout << "particle color: " << particles[i].color[0] 
-            //     << " " << particles[i].color[1]
-            //     << " " << particles[i].color[2]
-            //     << " " << particles[i].color[3] << std::endl;
-             particles[i].velocity = 0.01f * glm::vec3(RndFloat(-1.0f , 1.0f), RndFloat(-1.0f , 1.0f) , 0.0f);
+            // particles[i].pos = glm::vec4(RndFloat(-1.0f , 1.0f), RndFloat(-1.0f , 1.0f), 
+            //     purple::Engine::getRenderEngine()->getAndChangeDepthValue() , 1.0f);
+            particles[i].pos = glm::vec4(step * i, step * i * k , 0.0f , 1.0f);
+            particles[i].color = glm::vec4(
+                RndFloat(0.0f , 1.0f),
+                RndFloat(0.0f , 1.0f),
+                RndFloat(0.0f , 1.0f),
+                RndFloat(0.0f , 1.0f)
+            );
+            particles[i].velocity = 100.0f * glm::vec4(RndFloat(-1.0f , 1.0f), 
+                RndFloat(-1.0f , 1.0f) , 0.0f , 0.0f);
+
+            particles[i].size = 100.0f;
+            particles[i].type = 1;
         }//end for i
         return particles;
     }
 
-    void ParticleGroup::updateAndRender(){
+    void ParticleGroup::updateAndRender(float deltaTime, float depth){
+        update(deltaTime);
+        depth = purple::Engine::getRenderEngine()->getAndChangeDepthValue();
+        render(depth);
+    }
+
+    void ParticleGroup::update(float deltaTime){
         computeShader.useShader();
+        computeShader.setUniformFloat("dt" , deltaTime);
+        computeShader.setUniformVec2("viewSize", 
+            glm::vec2(Engine::ScreenWidth , Engine::ScreenHeight));
         glBindBuffer(GL_SHADER_STORAGE_BUFFER, ssbo);
         glBindBufferBase(GL_SHADER_STORAGE_BUFFER, 0, ssbo);
         computeShader.dispathComputeShader(particleCount,1,1);
         glMemoryBarrier(GL_SHADER_STORAGE_BARRIER_BIT);
+    }
 
-        renderShader.useShader();
+    void ParticleGroup::render(float depth){
+        glDepthMask(GL_FALSE); // 禁止写入深度缓冲区
         glBindVertexArray(vao);
+        renderShader.useShader();
+        renderShader.setUniformFloat("depth",depth);
+        renderShader.setUniformMat3("transMat" , 
+            Engine::getRenderEngine()->normalMatrix_);
         glBindBuffer(GL_SHADER_STORAGE_BUFFER, ssbo);
         glBindBufferBase(GL_SHADER_STORAGE_BUFFER, 0, ssbo);
         glDrawArrays(GL_POINTS, 0, this->particleCount);
         glBindVertexArray(0);
+        glDepthMask(GL_TRUE);  // 恢复深度写入
     }
 
     ParticleGroup::~ParticleGroup(){
         Log::i("particle_group" , "~ParticleGroup");
+        if(vao != 0){
+            glDeleteVertexArrays(1, &vao);
+        }
+        if(ssbo != 0){
+            glDeleteBuffers(1 , &ssbo);
+        }
         computeShader.deleteSelf();
         renderShader.deleteSelf();
     }

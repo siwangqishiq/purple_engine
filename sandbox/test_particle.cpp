@@ -1,7 +1,10 @@
 #include "test_particle.h"
+#include "utils.h"
 
 void TestParticle::onInit(){
     // std::cout << "OpenGL Version: " << glGetString(GL_VERSION) << std::endl;
+    mTime = purple::currentTimeMillis();
+
     purple::Log::i("test","TestParticle::onInit");
     unsigned int computeShaderProgram = 
         purple::CreateComputeProgremAsset("shader/compute/compute.glsl");
@@ -18,7 +21,7 @@ void TestParticle::onInit(){
     glGetIntegerv(GL_MAX_COMPUTE_WORK_GROUP_INVOCATIONS, &maxWorkGroupInvocations);
     purple::Log::i("test","GL_MAX_COMPUTE_WORK_GROUP_INVOCATIONS = %d" , maxWorkGroupInvocations);
     
-    particles = std::make_shared<purple::ParticleGroup>("test", 1024 * 64);
+    particles = std::make_shared<purple::ParticleGroup>("test", 64);
 }
 
 void TestParticle::onTick(){
@@ -34,6 +37,11 @@ void TestParticle::testSsbo(){
 }
 
 void TestParticle::testParticleUpdate(){
-    particles->updateAndRender();
+    long t = purple::currentTimeMillis();
+    long dtMls = t - mTime;
+    mTime = t;
+    float dt = dtMls / 1000.0f;
+    // std::cout << "dela Time = " << dt << std::endl;
+    particles->updateAndRender(dt, -1.0f);
 }
 

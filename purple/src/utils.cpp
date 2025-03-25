@@ -27,6 +27,11 @@ namespace purple{
         return ms.count();
     }
 
+    float currentTimeMillisFloat(){
+        auto t = currentTimeMillis();
+        return t / 1000.0f;
+    }
+
     void ScaleWithPoint(Point &point , float scale, Point center){
         float x = point.x;
         float y = point.y;

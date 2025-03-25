@@ -2,35 +2,35 @@
 layout(local_size_x = 32) in;
 
 struct Particle{
-    vec3 position;
-    float _padding0;
-    vec3 velocity;
-    float _padding1;
+    vec4 position;
+    vec4 velocity;
     vec4 color;
+    int type;
+    float size;
+    vec2 padding;
 };
 
 layout(std430, binding = 0) buffer SSBO {
     Particle particleData[];
 };
 
-const float espi = 0.001f;
-
-// uniform int uParticleCount;
+uniform vec2 viewSize;
+uniform float dt;
 
 void main(){
     uint idx = gl_GlobalInvocationID.x;
     Particle p = particleData[idx];
 
     vec2 vel = p.velocity.xy;
-    if(p.position.x <= -1.0f - espi || p.position.x >= 1.0f + espi){
+    if(p.position.x <= -20.0f || p.position.x >= viewSize.x ){
         vel.x = -vel.x; 
     }
-    if(p.position.y <= -1.0f - espi || p.position.y >= 1.0f + espi){
+    if(p.position.y <= -20.0f|| p.position.y >= viewSize.y ){
         vel.y = -vel.y;
     }
     
-    p.velocity = vec3(vel.xy , 0.0f);
-    p.position = p.position + p.velocity;
+    p.velocity = vec4(vel.xy , 0.0f, 0.0f);
+    p.position = p.position + p.velocity * dt;
     particleData[idx] = p;
 }   
 

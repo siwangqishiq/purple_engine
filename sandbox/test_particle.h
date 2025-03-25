@@ -2,7 +2,7 @@
 
 #include <memory>
 #include "purple.h"
-#include "particle/particle.h"
+#include "particle/group.h"
 
 class TestParticle : public purple::IApp{
 public:
@@ -11,7 +11,7 @@ public:
     virtual void onDispose() override;
 
 private:
-    float mTime = 0.0f;
+    long mTime = 0;
 
     std::shared_ptr<purple::ParticleGroup> particles;
     
