@@ -6,5 +6,9 @@ namespace purple{
         ParticleEmit();
 
         ~ParticleEmit();
+
+    private:
+        int maxParticleCount;
+        int minParticleCount;
     };
 }

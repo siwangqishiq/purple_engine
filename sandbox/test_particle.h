@@ -9,7 +9,7 @@ public:
     virtual void onInit() override;
     virtual void onTick() override;
     virtual void onDispose() override;
-
+    
 private:
     long mTime = 0;
 

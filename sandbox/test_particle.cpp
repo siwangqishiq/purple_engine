@@ -30,6 +30,7 @@ void TestParticle::onTick(){
 }
 
 void TestParticle::onDispose(){
+    particles->dispose();
 }
 
 void TestParticle::testSsbo(){

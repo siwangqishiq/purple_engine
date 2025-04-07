@@ -107,15 +107,23 @@ namespace purple{
         glDepthMask(GL_TRUE);  // 恢复深度写入
     }
 
-    ParticleGroup::~ParticleGroup(){
-        Log::i("particle_group" , "~ParticleGroup");
+    void ParticleGroup::dispose(){
+        Log::i("particle_group" , "dispose()");
         if(vao != 0){
-            glDeleteVertexArrays(1, &vao);
+            GLuint ids[1];
+            ids[0] = vao;
+            glDeleteVertexArrays(1, ids);
         }
         if(ssbo != 0){
-            glDeleteBuffers(1 , &ssbo);
+            GLuint ids[1];
+            ids[0] = ssbo;
+            glDeleteBuffers(1 , ids);
         }
         computeShader.deleteSelf();
         renderShader.deleteSelf();
+    }
+
+    ParticleGroup::~ParticleGroup(){
+        Log::i("particle_group" , "~ParticleGroup");
     }
 }

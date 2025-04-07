@@ -14,15 +14,15 @@ namespace purple{
         void init();
 
         void updateAndRender(float deltaTime, float depth);
-
         void update(float deltaTime);
         void render(float depth);
+        void dispose();
     protected:
         int particleCount;
     private:
         std::string id;
         GLuint ssbo = 0;
-        GLuint vao;
+        GLuint vao = 0;
 
         Shader computeShader;
         Shader renderShader;
