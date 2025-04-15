@@ -25,6 +25,8 @@ void TestParticle::onInit(){
 
     threadPool = std::make_unique<purple::ThreadPool>(3);
 
+    isEnd.store(false);
+
     threadPool->enqueue([this]{
         while(!this->isEnd){
             purple::Log::i("test" , "run in thread %d" , std::this_thread::get_id());

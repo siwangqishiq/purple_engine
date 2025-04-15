@@ -18,7 +18,7 @@ private:
 
     std::shared_ptr<purple::ParticleGroup> particles;
 
-    std::atomic<bool> isEnd = false;
+    std::atomic<bool> isEnd;
     
     void testSsbo();
 
