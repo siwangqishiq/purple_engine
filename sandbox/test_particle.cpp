@@ -22,6 +22,20 @@ void TestParticle::onInit(){
     purple::Log::i("test","GL_MAX_COMPUTE_WORK_GROUP_INVOCATIONS = %d" , maxWorkGroupInvocations);
     
     particles = std::make_shared<purple::ParticleGroup>("test", 64);
+
+    threadPool = std::make_unique<purple::ThreadPool>(3);
+
+    threadPool->enqueue([this]{
+        while(!this->isEnd){
+            purple::Log::i("test" , "run in thread %d" , std::this_thread::get_id());
+        }//end while
+    });
+
+    threadPool->enqueue([this]{
+        while(!this->isEnd){
+            purple::Log::i("test" , "run in thread %d" , std::this_thread::get_id());
+        }//end while
+    });
 }
 
 void TestParticle::onTick(){
@@ -31,6 +45,9 @@ void TestParticle::onTick(){
 
 void TestParticle::onDispose(){
     particles->dispose();
+
+    this->isEnd = true;
+    threadPool->shutdown();
 }
 
 void TestParticle::testSsbo(){

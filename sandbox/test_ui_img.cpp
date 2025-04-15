@@ -343,7 +343,7 @@ void TestImgUi::onDispose(){
         purple::AudioManager::getInstance()->releaseAudioEntity(bgm);
     }
 
-     if(bgm2 != nullptr){
+    if(bgm2 != nullptr){
         purple::AudioManager::getInstance()->releaseAudioEntity(bgm2);
     }
 }
