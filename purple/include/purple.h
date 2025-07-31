@@ -12,6 +12,7 @@
 #include "json.h"
 #include "audio/audio.h"
 #include "input/input_common.h"
+#include <cmath>
 
 
 namespace purple{
@@ -67,6 +68,8 @@ namespace purple{
         static std::shared_ptr<RenderEngine> getRenderEngine();
 
         static std::shared_ptr<Timer> getTimer();
+
+        static int vpTopx(float vpSize);
         
         //导出图片
         static int exportImageFile(std::string path ,int left , int top , 
@@ -74,6 +77,13 @@ namespace purple{
     private:
         static std::shared_ptr<RenderEngine> renderEngine_;
         static std::shared_ptr<Timer> timer_;
+
+        static float dpSize;
+            
+        static void calculateDpSize(){
+            double totalSize = sqrt(ScreenWidth * ScreenWidth + ScreenHeight * ScreenHeight);
+            Engine::dpSize = totalSize / 1000.0f;
+        }
     };
 }
 

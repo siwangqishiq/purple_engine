@@ -440,11 +440,11 @@ namespace purple{
         #ifdef __ANDROID__
         "#version 310 es \n";
         #elif defined(__APPLE__) && defined(__arm64__)
-        "#version 430 core \n";
+        "#version 410 core \n";
         #elif __ARM_ARCH
         "#version 330 es \n";
         #else
-        "#version 430 core \n";
+        "#version 410 core \n";
         #endif
         
         std::string shaderBodySrc = AssetManager::getInstance()->readAssetTextFileAsString(shaderPath);

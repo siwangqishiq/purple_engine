@@ -103,7 +103,9 @@ void TestImgUi::testSwitcher(){
     container->setBackgroundColor<StackContainer>(ConverColorValue(Color::White));
     ui->setRootContainer(container);
 
-    auto switcher = std::make_shared<Switcher>(100, 50);
+    auto switcher = std::make_shared<Switcher>(
+        purple::Engine::vpTopx(100), 
+        purple::Engine::vpTopx(50));
     switcher->setLayoutGravity<Switcher>(LayoutGravity::Center);
     container->addChild(switcher);
 }

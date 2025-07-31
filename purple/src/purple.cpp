@@ -16,12 +16,14 @@
 #endif
 
 namespace purple{
+    const char* purple::Engine::TAG = "purple";
+
     std::shared_ptr<RenderEngine> purple::Engine::renderEngine_ = nullptr;
     std::shared_ptr<Timer> purple::Engine::timer_ = nullptr;
 
     int purple::Engine::ScreenWidth = 0;
     int purple::Engine::ScreenHeight = 0;
-    const char* purple::Engine::TAG = "purple";
+    float purple::Engine::dpSize = 1.0f;
 
     bool UNITTEST = false;
 
@@ -117,10 +119,16 @@ namespace purple{
         ScreenWidth = w;
         ScreenHeight = h;
         Log::w(TAG , "scren resize %d x %d" , w , h);
+        calculateDpSize();
+
         if(renderEngine_ == nullptr){
             renderEngine_ = std::make_shared<RenderEngine>();
         }
         renderEngine_->onScreenResize();
+    }
+
+    int Engine::vpTopx(float vpSize){
+        return vpSize * dpSize;
     }
 
     void Engine::tick(){

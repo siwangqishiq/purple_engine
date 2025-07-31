@@ -7,7 +7,7 @@
 - ~~Shader二进制产物cache~~ 
 - ~~Android平台的支持~~
 - 新的View体系(working)
-- 粒子系统API
+- 粒子系统API (计算着色器支持性问题 暂且不实现了)
 
 
 ### UI库 Ver1.0
